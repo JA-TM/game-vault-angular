@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 import { Videojuego } from '../models/videojuego';
 import { environment } from '../../environments/environment';
 
@@ -14,6 +14,17 @@ export class VideojuegosService {
   };
 
   juegos = signal<Videojuego[]>([]);
+  filtro = signal<string>('');
+
+  juegosFiltrados = computed(() => {
+    const texto = this.filtro().toLowerCase();
+    if (!texto) return this.juegos();
+    return this.juegos().filter(j =>
+      j.nombre.toLowerCase().includes(texto) ||
+      j.consola.toLowerCase().includes(texto) ||
+      j.genero.toLowerCase().includes(texto)
+    );
+  });
 
   async cargarJuegos() {
     const response = await fetch(this.url, { headers: this.headers });
@@ -22,6 +33,10 @@ export class VideojuegosService {
   }
 
   obtenerJuegos() {
-    return this.juegos;
+    return this.juegosFiltrados;
+  }
+
+  setFiltro(texto: string) {
+    this.filtro.set(texto);
   }
 }

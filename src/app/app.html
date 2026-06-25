@@ -1,23 +1,24 @@
 <main class="contenedor">
   <h1>GAME VAULT</h1>
   <p class="subtitulo">
-    Catálogo de videojuegos · Datos mock · v0.2
+    Catálogo de videojuegos · v0.6
   </p>
+
+  <div class="buscador">
+    <input
+      type="text"
+      placeholder="Buscar por nombre, consola o género..."
+      [value]="filtro()"
+      (input)="onFiltro($any($event.target).value)"
+    />
+  </div>
 
   @if (juegos().length === 0) {
     <p class="mensaje-vacio">No hay juegos registrados.</p>
   } @else {
     <section class="listado-juegos">
       @for (juego of juegos(); track juego.id) {
-        <article class="tarjeta-juego">
-          <h2>{{ juego.nombre }}</h2>
-          <p><strong>Consola:</strong> {{ juego.consola }}</p>
-          <p><strong>Género:</strong> {{ juego.genero }}</p>
-          <p><strong>Desarrollador:</strong> {{ juego.desarrollador }}</p>
-          <p><strong>Año:</strong> {{ juego.anio_lanzamiento }}</p>
-          <p><strong>Puntuación:</strong> {{ juego.puntuacion }} / 10</p>
-          <p><strong>Verificado:</strong> {{ juego.verificado ? 'Sí' : 'No' }}</p>
-        </article>
+        <app-tarjeta-juego [juego]="juego" />
       }
     </section>
   }
