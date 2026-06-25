@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { VideojuegosService } from './services/videojuegos.service';
 
@@ -9,7 +9,11 @@ import { VideojuegosService } from './services/videojuegos.service';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit {
   private videojuegosService = inject(VideojuegosService);
   juegos = this.videojuegosService.obtenerJuegos();
+
+  ngOnInit() {
+    this.videojuegosService.cargarJuegos();
+  }
 }

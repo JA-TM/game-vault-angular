@@ -1,46 +1,25 @@
 import { Injectable, signal } from '@angular/core';
 import { Videojuego } from '../models/videojuego';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VideojuegosService {
 
-  private juegos = signal<Videojuego[]>([
-    {
-      id: 1,
-      nombre: 'Cyberpunk 2077',
-      consola: 'PC',
-      genero: 'RPG',
-      modalidad: 'Single Player',
-      desarrollador: 'CD Projekt Red',
-      anio_lanzamiento: 2020,
-      puntuacion: 9,
-      verificado: true
-    },
-    {
-      id: 2,
-      nombre: 'The Last of Us Part I',
-      consola: 'PS5',
-      genero: 'Acción',
-      modalidad: 'Single Player',
-      desarrollador: 'Naughty Dog',
-      anio_lanzamiento: 2022,
-      puntuacion: 10,
-      verificado: true
-    },
-    {
-      id: 3,
-      nombre: 'Elden Ring',
-      consola: 'PC',
-      genero: 'RPG',
-      modalidad: 'Single Player',
-      desarrollador: 'FromSoftware',
-      anio_lanzamiento: 2022,
-      puntuacion: 10,
-      verificado: false
-    }
-  ]);
+  private url = `${environment.supabaseUrl}/rest/v1/videojuegos`;
+  private headers = {
+    'apikey': environment.supabaseKey,
+    'Authorization': `Bearer ${environment.supabaseKey}`
+  };
+
+  juegos = signal<Videojuego[]>([]);
+
+  async cargarJuegos() {
+    const response = await fetch(this.url, { headers: this.headers });
+    const data = await response.json();
+    this.juegos.set(data);
+  }
 
   obtenerJuegos() {
     return this.juegos;
