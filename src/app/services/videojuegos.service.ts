@@ -52,4 +52,11 @@ export class VideojuegosService {
   setFiltro(texto: string) {
     this.filtro.set(texto);
   }
+  async eliminarJuego(id: number) {
+    await fetch(`${this.url}?id=eq.${id}`, {
+      method: 'DELETE',
+      headers: this.headers
+    });
+    await this.cargarJuegos();
+  }
 }
