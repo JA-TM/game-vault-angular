@@ -1,8 +1,18 @@
 <main class="contenedor">
   <h1>GAME VAULT</h1>
   <p class="subtitulo">
-    Catálogo de videojuegos · v0.6
+    Catálogo de videojuegos · v0.7
   </p>
+
+  <div class="acciones-top">
+    <button class="btn-nuevo" (click)="toggleFormulario()">
+      {{ mostrarFormulario() ? '✕ Cancelar' : '+ Añadir juego' }}
+    </button>
+  </div>
+
+  @if (mostrarFormulario()) {
+    <app-formulario-juego (juegoCreadо)="onJuegoCreado()" />
+  }
 
   <div class="buscador">
     <input

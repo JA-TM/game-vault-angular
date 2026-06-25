@@ -57,3 +57,20 @@
     border-color: #2563eb;
     box-shadow: 0 0 0 3px #2563eb20;
   }
+  .acciones-top {
+    margin-bottom: 24px;
+  }
+  
+  .btn-nuevo {
+    padding: 10px 24px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  
+  .btn-nuevo:hover {
+    background-color: #1d4ed8;
+  }

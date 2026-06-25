@@ -1,0 +1,74 @@
+.formulario {
+    background: #f8fafc;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 32px;
+  }
+  
+  .formulario h2 {
+    margin-top: 0;
+    color: #0f172a;
+    margin-bottom: 20px;
+  }
+  
+  .campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+  
+  .campo label {
+    font-size: 0.85em;
+    font-weight: bold;
+    color: #475569;
+    margin-bottom: 4px;
+  }
+  
+  .campo input {
+    padding: 8px 12px;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    font-size: 1em;
+    outline: none;
+  }
+  
+  .campo input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px #2563eb20;
+  }
+  
+  .campo-check {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .acciones {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  
+  .acciones button {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #2563eb;
+    color: white;
+  }
+  
+  .acciones button:hover {
+    background-color: #1d4ed8;
+  }
+  
+  .btn-cancelar {
+    background-color: #e2e8f0 !important;
+    color: #0f172a !important;
+  }
+  
+  .btn-cancelar:hover {
+    background-color: #cbd5e1 !important;
+  }
