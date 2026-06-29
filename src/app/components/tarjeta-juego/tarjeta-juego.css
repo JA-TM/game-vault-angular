@@ -1,32 +1,88 @@
+.tarjeta-juego {
+  border: 1px solid #145c33;
+  background: rgba(4, 18, 11, 0.7);
+  padding: 18px;
+  position: relative;
+  transition: box-shadow 0.3s;
+}
+
+.tarjeta-juego:hover {
+  box-shadow: 0 0 20px #4ade8033;
+  border-color: #4ade80;
+}
+
+.tarjeta-juego h2 {
+  font-family: 'VT323', monospace;
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  color: #4ade80;
+  text-transform: uppercase;
+  text-shadow: 0 0 6px #4ade8066;
+  margin-bottom: 12px;
+  border-bottom: 1px dashed #145c33;
+  padding-bottom: 8px;
+}
+
+.tarjeta-juego h2::before {
+  content: '> ';
+  color: #2f9e5b;
+}
+
+.tarjeta-juego p {
+  font-size: 0.82rem;
+  color: #2f9e5b;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+
+.tarjeta-juego p strong {
+  color: #4ade80;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+}
+
 .acciones-tarjeta {
-  margin-top: 12px;
+  margin-top: 16px;
   display: flex;
-  gap: 8px;
+  gap: 10px;
+  border-top: 1px dashed #145c33;
+  padding-top: 12px;
 }
 
-.btn-eliminar {
-  padding: 6px 14px;
-  background-color: #ef4444;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 0.85em;
-  cursor: pointer;
-}
-
-.btn-eliminar:hover {
-  background-color: #dc2626;
-}
 .btn-editar {
-  padding: 6px 14px;
-  background-color: #f59e0b;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 0.85em;
+  padding: 6px 16px;
+  background: transparent;
+  color: #4ade80;
+  border: 1px solid #1d7a44;
+  font-family: 'VT323', monospace;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   cursor: pointer;
+  transition: box-shadow 0.2s, background 0.2s;
 }
 
 .btn-editar:hover {
-  background-color: #d97706;
+  background: rgba(74, 222, 128, 0.1);
+  box-shadow: 0 0 10px #4ade8055;
+}
+
+.btn-eliminar {
+  padding: 6px 16px;
+  background: #1a0303;
+  color: #ff5b5b;
+  border: 1px solid #ff2b2b;
+  font-family: 'VT323', monospace;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+
+.btn-eliminar:hover {
+  background: #2a0505;
+  box-shadow: 0 0 10px #ff2b2baa;
 }

@@ -1,41 +1,41 @@
-<main class="contenedor">
+<div class="header">
   <h1>GAME VAULT</h1>
-  <p class="subtitulo">
-    Catálogo de videojuegos · v0.9
-  </p>
+  <div class="subtitulo">// catálogo de videojuegos — acceso restringido · v1.0</div>
+</div>
 
+<main class="contenedor">
   <div class="acciones-top">
-    <button class="btn-nuevo" (click)="toggleFormulario()">
-      {{ mostrarFormulario() ? '✕ Cancelar' : '+ Añadir juego' }}
-    </button>
+      <button class="btn-nuevo" (click)="toggleFormulario()">
+          {{ mostrarFormulario() ? '[ cancelar ]' : '[ + nuevo registro ]' }}
+      </button>
   </div>
 
   @if (mostrarFormulario()) {
-    <app-formulario-juego
-      [juegoEditar]="juegoEditar()"
-      (juegoGuardado)="onJuegoGuardado()"
-    />
+      <app-formulario-juego
+          [juegoEditar]="juegoEditar()"
+          (juegoGuardado)="onJuegoGuardado()"
+      />
   }
 
   <div class="buscador">
-    <input
-      type="text"
-      placeholder="Buscar por nombre, consola o género..."
-      [value]="filtro()"
-      (input)="onFiltro($any($event.target).value)"
-    />
+      <input
+          type="text"
+          placeholder="> buscar por nombre, consola o género..."
+          [value]="filtro()"
+          (input)="onFiltro($any($event.target).value)"
+      />
   </div>
 
   @if (juegos().length === 0) {
-    <p class="mensaje-vacio">No hay juegos registrados.</p>
+      <p class="mensaje-vacio">No hay registros en la base de datos.</p>
   } @else {
-    <section class="listado-juegos">
-      @for (juego of juegos(); track juego.id) {
-        <app-tarjeta-juego
-          [juego]="juego"
-          (editar)="onEditar($event)"
-        />
-      }
-    </section>
+      <section class="listado-juegos">
+          @for (juego of juegos(); track juego.id) {
+              <app-tarjeta-juego
+                  [juego]="juego"
+                  (editar)="onEditar($event)"
+              />
+          }
+      </section>
   }
 </main>

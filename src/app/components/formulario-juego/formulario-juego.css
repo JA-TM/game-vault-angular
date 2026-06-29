@@ -1,74 +1,122 @@
 .formulario {
-    background: #f8fafc;
-    border: 1px solid #d0d7de;
-    border-radius: 8px;
-    padding: 24px;
-    margin-bottom: 32px;
-  }
-  
-  .formulario h2 {
-    margin-top: 0;
-    color: #0f172a;
-    margin-bottom: 20px;
-  }
-  
-  .campo {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 16px;
-  }
-  
-  .campo label {
-    font-size: 0.85em;
-    font-weight: bold;
-    color: #475569;
-    margin-bottom: 4px;
-  }
-  
-  .campo input {
-    padding: 8px 12px;
-    border: 1px solid #d0d7de;
-    border-radius: 6px;
-    font-size: 1em;
-    outline: none;
-  }
-  
-  .campo input:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px #2563eb20;
-  }
-  
-  .campo-check {
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .acciones {
-    display: flex;
-    gap: 12px;
-    margin-top: 20px;
-  }
-  
-  .acciones button {
-    padding: 10px 24px;
-    border: none;
-    border-radius: 6px;
-    font-size: 1em;
-    cursor: pointer;
-    background-color: #2563eb;
-    color: white;
-  }
-  
-  .acciones button:hover {
-    background-color: #1d4ed8;
-  }
-  
-  .btn-cancelar {
-    background-color: #e2e8f0 !important;
-    color: #0f172a !important;
-  }
-  
-  .btn-cancelar:hover {
-    background-color: #cbd5e1 !important;
-  }
+  width: 100%;
+  border: 1px solid #145c33;
+  background: rgba(4, 18, 11, 0.7);
+  padding: 30px 34px;
+  margin-bottom: 32px;
+  box-shadow: 0 0 40px #00000080, inset 0 0 60px #04140b;
+}
+
+.formulario h2 {
+  font-family: 'VT323', monospace;
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  color: #4ade80;
+  text-transform: uppercase;
+  border-bottom: 1px dashed #145c33;
+  padding-bottom: 12px;
+  margin-bottom: 26px;
+  text-shadow: 0 0 6px #4ade8066;
+}
+
+.formulario h2::before {
+  content: '> ';
+  color: #2f9e5b;
+}
+
+.campo {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 6px;
+}
+
+.campo label {
+  font-size: 0.82rem;
+  letter-spacing: 1px;
+  color: #2f9e5b;
+  text-transform: uppercase;
+  text-align: right;
+}
+
+.campo label::after {
+  content: ':';
+}
+
+.campo input[type="text"],
+.campo input[type="number"] {
+  width: 100%;
+  padding: 9px 12px;
+  background: rgba(0,30,15,0.3);
+  border: 1px solid #1d7a44;
+  color: #7bffb0;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo input:focus {
+  border-color: #4ade80;
+  box-shadow: 0 0 10px #4ade8055, inset 0 0 10px #04140b;
+}
+
+.campo input::placeholder {
+  color: #1d7a44;
+}
+
+.campo-check {
+  grid-template-columns: 180px auto 1fr;
+}
+
+.campo-check label {
+  text-align: right;
+}
+
+.campo input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #4ade80;
+  cursor: pointer;
+}
+
+.acciones {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px dashed #145c33;
+}
+
+.acciones button {
+  padding: 10px 28px;
+  background: #1a0303;
+  color: #ff5b5b;
+  border: 1px solid #ff2b2b;
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-shadow: 0 0 6px #ff2b2b88;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.acciones button:hover {
+  background: #2a0505;
+  box-shadow: 0 0 18px #ff2b2baa;
+}
+
+.btn-cancelar {
+  background: transparent !important;
+  color: #4ade80 !important;
+  border: 1px solid #1d7a44 !important;
+  text-shadow: none !important;
+}
+
+.btn-cancelar:hover {
+  background: rgba(74, 222, 128, 0.1) !important;
+  box-shadow: 0 0 10px #4ade8055 !important;
+}
