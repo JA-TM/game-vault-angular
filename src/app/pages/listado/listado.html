@@ -5,6 +5,12 @@
       </button>
     </div>
   
+    @if (mensaje()) {
+      <div class="mensaje-estado" [class.ok]="mensaje()!.tipo === 'ok'" [class.error]="mensaje()!.tipo === 'error'">
+        {{ mensaje()!.tipo === 'ok' ? '[ OK ] ' : '[ ERROR ] ' }}{{ mensaje()!.texto }}
+      </div>
+    }
+  
     <div class="buscador">
       <input
         type="text"
@@ -25,5 +31,11 @@
           />
         }
       </section>
+  
+      <div class="paginacion">
+        <button (click)="anterior()" [disabled]="paginaActual() === 1">[ ← ]</button>
+        <span>{{ paginaActual() }} / {{ totalPaginas() }}</span>
+        <button (click)="siguiente()" [disabled]="paginaActual() === totalPaginas()">[ → ]</button>
+      </div>
     }
   </main>

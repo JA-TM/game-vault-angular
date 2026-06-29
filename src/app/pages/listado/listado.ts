@@ -16,8 +16,11 @@ export class Listado implements OnInit {
   private videojuegosService = inject(VideojuegosService);
   private router = inject(Router);
 
-  juegos = this.videojuegosService.obtenerJuegos();
+  juegos = this.videojuegosService.juegosPaginados;
   filtro = this.videojuegosService.filtro;
+  mensaje = this.videojuegosService.mensaje;
+  paginaActual = this.videojuegosService.paginaActual;
+  totalPaginas = this.videojuegosService.totalPaginas;
 
   ngOnInit() {
     this.videojuegosService.cargarJuegos();
@@ -25,6 +28,7 @@ export class Listado implements OnInit {
 
   onFiltro(texto: string) {
     this.videojuegosService.setFiltro(texto);
+    this.videojuegosService.irAPagina(1);
   }
 
   onEditar(juego: Videojuego) {
@@ -33,5 +37,13 @@ export class Listado implements OnInit {
 
   irANuevo() {
     this.router.navigate(['/nuevo']);
+  }
+
+  anterior() {
+    this.videojuegosService.paginaAnterior();
+  }
+
+  siguiente() {
+    this.videojuegosService.paginaSiguiente();
   }
 }
