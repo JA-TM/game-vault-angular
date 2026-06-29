@@ -7,6 +7,7 @@
   <p><strong>Puntuación:</strong> {{ juego().puntuacion }} / 10</p>
   <p><strong>Verificado:</strong> {{ juego().verificado ? 'Sí' : 'No' }}</p>
   <div class="acciones-tarjeta">
+    <button class="btn-editar" (click)="onEditar()">✏️ Editar</button>
     <button class="btn-eliminar" (click)="eliminar()">🗑 Eliminar</button>
   </div>
 </article>

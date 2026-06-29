@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { VideojuegosService } from './services/videojuegos.service';
 import { TarjetaJuego } from './components/tarjeta-juego/tarjeta-juego';
 import { FormularioJuego } from './components/formulario-juego/formulario-juego';
+import { Videojuego } from './models/videojuego';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ export class App implements OnInit {
   juegos = this.videojuegosService.obtenerJuegos();
   filtro = this.videojuegosService.filtro;
   mostrarFormulario = signal(false);
+  juegoEditar = signal<Videojuego | null>(null);
 
   ngOnInit() {
     this.videojuegosService.cargarJuegos();
@@ -28,9 +30,16 @@ export class App implements OnInit {
 
   toggleFormulario() {
     this.mostrarFormulario.update(v => !v);
+    this.juegoEditar.set(null);
   }
 
-  onJuegoCreado() {
+  onEditar(juego: Videojuego) {
+    this.juegoEditar.set(juego);
+    this.mostrarFormulario.set(true);
+  }
+
+  onJuegoGuardado() {
     this.mostrarFormulario.set(false);
+    this.juegoEditar.set(null);
   }
 }

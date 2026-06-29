@@ -59,4 +59,15 @@ export class VideojuegosService {
     });
     await this.cargarJuegos();
   }
+  async editarJuego(id: number, juego: Omit<Videojuego, 'id'>) {
+    await fetch(`${this.url}?id=eq.${id}`, {
+      method: 'PATCH',
+      headers: {
+        ...this.headers,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(juego)
+    });
+    await this.cargarJuegos();
+  }
 }

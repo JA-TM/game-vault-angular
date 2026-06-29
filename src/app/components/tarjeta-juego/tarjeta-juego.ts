@@ -1,4 +1,4 @@
-import { Component, input, output, inject } from '@angular/core';
+import { Component, input, inject, output } from '@angular/core';
 import { Videojuego } from '../../models/videojuego';
 import { VideojuegosService } from '../../services/videojuegos.service';
 
@@ -12,10 +12,15 @@ import { VideojuegosService } from '../../services/videojuegos.service';
 export class TarjetaJuego {
   juego = input.required<Videojuego>();
   private videojuegosService = inject(VideojuegosService);
+  editar = output<Videojuego>();
 
   async eliminar() {
     if (confirm(`¿Eliminar ${this.juego().nombre}?`)) {
       await this.videojuegosService.eliminarJuego(this.juego().id);
     }
+  }
+
+  onEditar() {
+    this.editar.emit(this.juego());
   }
 }

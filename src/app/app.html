@@ -1,7 +1,7 @@
 <main class="contenedor">
   <h1>GAME VAULT</h1>
   <p class="subtitulo">
-    Catálogo de videojuegos · v0.7
+    Catálogo de videojuegos · v0.9
   </p>
 
   <div class="acciones-top">
@@ -11,7 +11,10 @@
   </div>
 
   @if (mostrarFormulario()) {
-    <app-formulario-juego (juegoCreadо)="onJuegoCreado()" />
+    <app-formulario-juego
+      [juegoEditar]="juegoEditar()"
+      (juegoGuardado)="onJuegoGuardado()"
+    />
   }
 
   <div class="buscador">
@@ -28,7 +31,10 @@
   } @else {
     <section class="listado-juegos">
       @for (juego of juegos(); track juego.id) {
-        <app-tarjeta-juego [juego]="juego" />
+        <app-tarjeta-juego
+          [juego]="juego"
+          (editar)="onEditar($event)"
+        />
       }
     </section>
   }
