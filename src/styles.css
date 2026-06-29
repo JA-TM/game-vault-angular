@@ -1,41 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
     font-family: 'Share Tech Mono', monospace;
-    background: #020403;
-    color: #4ade80;
+    background-color: #0a0a0f;
+    color: #e0e0e0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
 }
 
-/* Scanlines CRT */
 body::before {
     content: '';
     position: fixed;
     inset: 0;
+    z-index: 0;
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.80) 0%,
+            rgba(0,0,0,0.55) 40%,
+            rgba(0,0,0,0.55) 60%,
+            rgba(0,0,0,0.80) 100%
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 3px,
+            rgba(0, 0, 0, 0.08) 3px,
+            rgba(0, 0, 0, 0.08) 4px
+        );
     pointer-events: none;
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(0,0,0,0) 0px,
-        rgba(0,0,0,0) 2px,
-        rgba(0,20,10,0.35) 3px,
-        rgba(0,20,10,0.35) 4px
-    );
-    z-index: 50;
 }
 
-/* Viñeta CRT */
-body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,0.6) 100%);
-    z-index: 49;
+@keyframes glitch {
+    0%, 90%, 100% { text-shadow: 0 0 10px #00ffe1, 0 0 30px #00ffe180; transform: translate(0); }
+    91% { text-shadow: -2px 0 #ff2d78, 2px 0 #c800ff; transform: translate(-2px, 1px); }
+    93% { text-shadow: 2px 0 #ff2d78, -2px 0 #c800ff; transform: translate(2px, -1px); }
+    95% { text-shadow: 0 0 10px #00ffe1, 0 0 30px #00ffe180; transform: translate(0); }
 }
 
 @keyframes flicker {

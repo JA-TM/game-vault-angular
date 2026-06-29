@@ -4,131 +4,140 @@
     padding: 0 20px;
     position: relative;
     z-index: 1;
-  }
-  
-  .detalle {
-    border: 1px solid #145c33;
-    background: rgba(4, 18, 11, 0.7);
-    padding: 30px 34px;
-    box-shadow: 0 0 40px #00000080;
-  }
-  
-  .detalle-header {
-    border-bottom: 1px dashed #145c33;
-    padding-bottom: 16px;
-    margin-bottom: 24px;
+}
+
+.detalle {
+    background: rgba(12, 12, 20, 0.92);
+    border: 1px solid #ffffff10;
+    border-top: 3px solid #00ffe1;
+    padding: 32px;
+}
+
+.detalle-header {
+    border-bottom: 1px solid #ffffff10;
+    padding-bottom: 20px;
+    margin-bottom: 28px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 10px;
-  }
-  
-  .detalle-header h2 {
-    font-family: 'VT323', monospace;
-    font-size: 2rem;
-    letter-spacing: 3px;
-    color: #4ade80;
+}
+
+.detalle-header h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #00ffe1;
     text-transform: uppercase;
-    text-shadow: 0 0 6px #4ade8066;
-  }
-  
-  .detalle-header h2::before {
-    content: '> ';
-    color: #2f9e5b;
-  }
-  
-  .verificado {
-    font-family: 'VT323', monospace;
-    font-size: 1rem;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px #00ffe180;
+}
+
+.verificado {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65em;
     letter-spacing: 2px;
-    color: #1d7a44;
-    border: 1px solid #1d7a44;
-    padding: 4px 10px;
-  }
-  
-  .verificado.activo {
-    color: #4ade80;
-    border-color: #4ade80;
-    text-shadow: 0 0 6px #4ade8066;
-  }
-  
-  .detalle-grid {
+    color: #444;
+    border: 1px solid #ffffff15;
+    padding: 5px 12px;
+    text-transform: uppercase;
+}
+
+.verificado.activo {
+    color: #00ffe1;
+    border-color: #00ffe140;
+    text-shadow: 0 0 6px #00ffe180;
+}
+
+.detalle-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 12px;
     margin-bottom: 28px;
-  }
-  
-  .detalle-campo {
+}
+
+.detalle-campo {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    border: 1px solid #145c33;
-    padding: 12px;
-    background: rgba(0, 30, 15, 0.3);
-  }
-  
-  .detalle-label {
-    font-size: 0.72rem;
+    gap: 6px;
+    border: 1px solid #ffffff08;
+    padding: 14px;
+    background: rgba(0, 255, 225, 0.02);
+}
+
+.detalle-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.6em;
     letter-spacing: 2px;
-    color: #2f9e5b;
+    color: #444;
     text-transform: uppercase;
-  }
-  
-  .detalle-valor {
-    font-size: 1rem;
-    color: #7bffb0;
-    letter-spacing: 1px;
-  }
-  
-  .puntuacion {
-    font-family: 'VT323', monospace;
-    font-size: 1.4rem;
-    color: #4ade80;
-    text-shadow: 0 0 6px #4ade8066;
-  }
-  
-  .detalle-acciones {
+}
+
+.detalle-valor {
+    font-size: 0.95em;
+    color: #ccc;
+    letter-spacing: 0.5px;
+}
+
+.puntuacion {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1em;
+    color: #00ffe1;
+    text-shadow: 0 0 6px #00ffe180;
+}
+
+.detalle-acciones {
     display: flex;
     gap: 12px;
     padding-top: 20px;
-    border-top: 1px dashed #145c33;
-  }
-  
-  .btn-volver {
+    border-top: 1px solid #ffffff08;
+}
+
+.btn-volver {
     padding: 10px 24px;
     background: transparent;
-    color: #4ade80;
-    border: 1px solid #1d7a44;
-    font-family: 'VT323', monospace;
-    font-size: 1.2rem;
+    color: #888;
+    border: 1px solid #ffffff20;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7em;
     letter-spacing: 3px;
     text-transform: uppercase;
     cursor: pointer;
-    transition: background 0.2s, box-shadow 0.2s;
-  }
-  
-  .btn-volver:hover {
-    background: rgba(74, 222, 128, 0.1);
-    box-shadow: 0 0 10px #4ade8055;
-  }
-  
-  .btn-editar {
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-volver:hover {
+    color: #e0e0e0;
+    border-color: #ffffff40;
+}
+
+.btn-editar {
     padding: 10px 24px;
-    background: #1a0303;
-    color: #ff5b5b;
-    border: 1px solid #ff2b2b;
-    font-family: 'VT323', monospace;
-    font-size: 1.2rem;
+    background: transparent;
+    color: #00ffe1;
+    border: 1px solid #00ffe150;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7em;
     letter-spacing: 3px;
     text-transform: uppercase;
     cursor: pointer;
-    text-shadow: 0 0 6px #ff2b2b88;
     transition: background 0.2s, box-shadow 0.2s;
-  }
-  
-  .btn-editar:hover {
-    background: #2a0505;
-    box-shadow: 0 0 18px #ff2b2baa;
-  }
+}
+
+.btn-editar:hover {
+    background: #00ffe110;
+    box-shadow: 0 0 14px #00ffe140;
+}
+
+.mensaje-vacio {
+    padding: 20px;
+    border: 1px solid #ffffff10;
+    color: #444;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+}

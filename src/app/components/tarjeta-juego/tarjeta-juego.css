@@ -1,95 +1,94 @@
 .tarjeta-juego {
-  border: 1px solid #145c33;
-  background: rgba(4, 18, 11, 0.7);
-  padding: 18px;
+  background: rgba(12, 12, 20, 0.92);
+  border: 1px solid #ffffff10;
+  border-top: 3px solid #00ffe1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   position: relative;
-  transition: box-shadow 0.3s;
+  z-index: 1;
+  transition: box-shadow 0.3s, border-color 0.3s;
 }
 
 .tarjeta-juego:hover {
-  box-shadow: 0 0 20px #4ade8033;
-  border-color: #4ade80;
+  box-shadow: 0 0 20px #00ffe115;
+  border-color: #00ffe130;
 }
 
 .tarjeta-juego h2 {
-  font-family: 'VT323', monospace;
-  font-size: 1.5rem;
-  letter-spacing: 3px;
-  color: #4ade80;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.95em;
+  font-weight: 700;
+  color: #00ffe1;
   text-transform: uppercase;
-  text-shadow: 0 0 6px #4ade8066;
-  margin-bottom: 12px;
-  border-bottom: 1px dashed #145c33;
-  padding-bottom: 8px;
-}
-
-.tarjeta-juego h2::before {
-  content: '> ';
-  color: #2f9e5b;
-}
-
-.tarjeta-juego p {
-  font-size: 0.82rem;
-  color: #2f9e5b;
-  letter-spacing: 1px;
-  margin-bottom: 6px;
-  line-height: 1.6;
-}
-
-.tarjeta-juego p strong {
-  color: #4ade80;
-  text-transform: uppercase;
-  font-size: 0.75rem;
   letter-spacing: 2px;
-}
-
-.acciones-tarjeta {
-  margin-top: 16px;
-  display: flex;
-  gap: 10px;
-  border-top: 1px dashed #145c33;
-  padding-top: 12px;
-}
-
-.btn-editar {
-  padding: 6px 16px;
-  background: transparent;
-  color: #4ade80;
-  border: 1px solid #1d7a44;
-  font-family: 'VT323', monospace;
-  font-size: 1rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
   cursor: pointer;
-  transition: box-shadow 0.2s, background 0.2s;
-}
-
-.btn-editar:hover {
-  background: rgba(74, 222, 128, 0.1);
-  box-shadow: 0 0 10px #4ade8055;
-}
-
-.btn-eliminar {
-  padding: 6px 16px;
-  background: #1a0303;
-  color: #ff5b5b;
-  border: 1px solid #ff2b2b;
-  font-family: 'VT323', monospace;
-  font-size: 1rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: box-shadow 0.2s, background 0.2s;
-}
-
-.btn-eliminar:hover {
-  background: #2a0505;
-  box-shadow: 0 0 10px #ff2b2baa;
-}
-.tarjeta-juego h2 {
-  cursor: pointer;
+  transition: text-shadow 0.2s;
+  margin-bottom: 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ffffff10;
 }
 
 .tarjeta-juego h2:hover {
-  text-shadow: 0 0 12px #4ade80;
+  text-shadow: 0 0 10px #00ffe1;
+}
+
+.tarjeta-juego p {
+  font-size: 0.82em;
+  color: #888;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+}
+
+.tarjeta-juego p strong {
+  color: #00ffe180;
+  font-size: 0.75em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-right: 6px;
+}
+
+.acciones-tarjeta {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #ffffff08;
+}
+
+.btn-editar {
+  padding: 7px 16px;
+  background: transparent;
+  color: #00ffe1;
+  border: 1px solid #00ffe140;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.65em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.btn-editar:hover {
+  background: #00ffe110;
+  box-shadow: 0 0 10px #00ffe140;
+}
+
+.btn-eliminar {
+  padding: 7px 16px;
+  background: transparent;
+  color: #ff2d78;
+  border: 1px solid #ff2d7840;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.65em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.btn-eliminar:hover {
+  background: #ff2d7810;
+  box-shadow: 0 0 10px #ff2d7840;
 }
