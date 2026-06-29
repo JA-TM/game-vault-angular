@@ -1,0 +1,48 @@
+<main class="contenedor">
+    @if (!cargado()) {
+      <p class="mensaje-vacio">Cargando...</p>
+    } @else if (!juego()) {
+      <p class="mensaje-vacio">Registro no encontrado.</p>
+    } @else {
+      <section class="detalle">
+        <div class="detalle-header">
+          <h2>{{ juego()!.nombre }}</h2>
+          <span class="verificado" [class.activo]="juego()!.verificado">
+            {{ juego()!.verificado ? '[ verificado ]' : '[ no verificado ]' }}
+          </span>
+        </div>
+  
+        <div class="detalle-grid">
+          <div class="detalle-campo">
+            <span class="detalle-label">Consola</span>
+            <span class="detalle-valor">{{ juego()!.consola }}</span>
+          </div>
+          <div class="detalle-campo">
+            <span class="detalle-label">Género</span>
+            <span class="detalle-valor">{{ juego()!.genero }}</span>
+          </div>
+          <div class="detalle-campo">
+            <span class="detalle-label">Modalidad</span>
+            <span class="detalle-valor">{{ juego()!.modalidad }}</span>
+          </div>
+          <div class="detalle-campo">
+            <span class="detalle-label">Desarrollador</span>
+            <span class="detalle-valor">{{ juego()!.desarrollador }}</span>
+          </div>
+          <div class="detalle-campo">
+            <span class="detalle-label">Año</span>
+            <span class="detalle-valor">{{ juego()!.anio_lanzamiento }}</span>
+          </div>
+          <div class="detalle-campo">
+            <span class="detalle-label">Puntuación</span>
+            <span class="detalle-valor puntuacion">{{ juego()!.puntuacion }} / 10</span>
+          </div>
+        </div>
+  
+        <div class="detalle-acciones">
+          <button class="btn-volver" (click)="volver()">[ ← volver ]</button>
+          <button class="btn-editar" (click)="editar()">[ editar ]</button>
+        </div>
+      </section>
+    }
+  </main>

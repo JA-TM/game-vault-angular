@@ -1,5 +1,5 @@
 <article class="tarjeta-juego">
-  <h2>{{ juego().nombre }}</h2>
+  <h2 (click)="verDetalle()">{{ juego().nombre }}</h2>
   <p><strong>Consola:</strong> {{ juego().consola }}</p>
   <p><strong>Género:</strong> {{ juego().genero }}</p>
   <p><strong>Desarrollador:</strong> {{ juego().desarrollador }}</p>

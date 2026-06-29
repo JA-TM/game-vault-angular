@@ -86,3 +86,10 @@
   background: #2a0505;
   box-shadow: 0 0 10px #ff2b2baa;
 }
+.tarjeta-juego h2 {
+  cursor: pointer;
+}
+
+.tarjeta-juego h2:hover {
+  text-shadow: 0 0 12px #4ade80;
+}
