@@ -7,8 +7,8 @@ import { environment } from '../../environments/environment';
 })
 export class VideojuegosService {
 
-  private url = `${environment.supabaseUrl}/rest/v1/videojuegos`;
-  private headers = {
+  url = `${environment.supabaseUrl}/rest/v1/videojuegos`;
+  headers = {
     'apikey': environment.supabaseKey,
     'Authorization': `Bearer ${environment.supabaseKey}`,
     'Content-Type': 'application/json'
@@ -45,20 +45,6 @@ export class VideojuegosService {
     await this.cargarJuegos();
   }
 
-  obtenerJuegos() {
-    return this.juegosFiltrados;
-  }
-
-  setFiltro(texto: string) {
-    this.filtro.set(texto);
-  }
-  async eliminarJuego(id: number) {
-    await fetch(`${this.url}?id=eq.${id}`, {
-      method: 'DELETE',
-      headers: this.headers
-    });
-    await this.cargarJuegos();
-  }
   async editarJuego(id: number, juego: Omit<Videojuego, 'id'>) {
     await fetch(`${this.url}?id=eq.${id}`, {
       method: 'PATCH',
@@ -69,5 +55,21 @@ export class VideojuegosService {
       body: JSON.stringify(juego)
     });
     await this.cargarJuegos();
+  }
+
+  async eliminarJuego(id: number) {
+    await fetch(`${this.url}?id=eq.${id}`, {
+      method: 'DELETE',
+      headers: this.headers
+    });
+    await this.cargarJuegos();
+  }
+
+  obtenerJuegos() {
+    return this.juegosFiltrados;
+  }
+
+  setFiltro(texto: string) {
+    this.filtro.set(texto);
   }
 }
