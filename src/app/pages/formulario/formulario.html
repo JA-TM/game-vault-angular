@@ -2,6 +2,12 @@
     @if (!cargado()) {
       <p class="mensaje-vacio">Cargando...</p>
     } @else {
+      @if (mensaje()) {
+        <div class="mensaje-estado" [class.error]="mensaje()!.tipo === 'error'">
+          {{ mensaje()!.tipo === 'ok' ? '[ OK ] ' : '[ ERROR ] ' }}{{ mensaje()!.texto }}
+        </div>
+      }
+
       <section class="formulario">
         <h2>{{ id ? 'Editar registro' : 'Nuevo registro' }}</h2>
   
@@ -40,13 +46,28 @@
           <input type="number" [(ngModel)]="puntuacion" min="1" max="10">
         </div>
   
+        <div class="campo">
+          <label>Portada (URL)</label>
+          <input type="url" [(ngModel)]="portada" placeholder="https://...">
+        </div>
+  
+        <div class="campo">
+          <label>Enlace compra</label>
+          <input type="url" [(ngModel)]="enlace_compra" placeholder="https://...">
+        </div>
+  
+        <div class="campo">
+          <label>Horas promedio</label>
+          <input type="number" [(ngModel)]="horas_promedio" min="0" placeholder="Opcional">
+        </div>
+  
         <div class="campo campo-check">
           <label>Verificado</label>
           <input type="checkbox" [(ngModel)]="verificado">
         </div>
   
         <div class="acciones">
-          <button (click)="guardar()">
+          <button class="btn-guardar" (click)="guardar()">
             {{ id ? '[ actualizar ]' : '[ guardar ]' }}
           </button>
           <button class="btn-cancelar" (click)="cancelar()">[ cancelar ]</button>

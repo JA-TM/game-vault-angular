@@ -11,6 +11,12 @@
             {{ juego()!.verificado ? '[ verificado ]' : '[ no verificado ]' }}
           </span>
         </div>
+
+        @if (juego()!.portada) {
+          <div class="detalle-portada">
+            <img [src]="juego()!.portada" [alt]="juego()!.nombre">
+          </div>
+        }
   
         <div class="detalle-grid">
           <div class="detalle-campo">
@@ -36,6 +42,20 @@
           <div class="detalle-campo">
             <span class="detalle-label">Puntuación</span>
             <span class="detalle-valor puntuacion">{{ juego()!.puntuacion }} / 10</span>
+          </div>
+          <div class="detalle-campo">
+            <span class="detalle-label">Horas promedio</span>
+            <span class="detalle-valor">{{ juego()!.horas_promedio ?? '—' }}</span>
+          </div>
+          <div class="detalle-campo">
+            <span class="detalle-label">Enlace compra</span>
+            @if (juego()!.enlace_compra) {
+              <a class="detalle-enlace" [href]="juego()!.enlace_compra" target="_blank" rel="noopener noreferrer">
+                {{ juego()!.enlace_compra }}
+              </a>
+            } @else {
+              <span class="detalle-valor">—</span>
+            }
           </div>
         </div>
   

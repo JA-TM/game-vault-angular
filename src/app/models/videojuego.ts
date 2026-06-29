@@ -10,5 +10,5 @@ export interface Videojuego {
     verificado: boolean;
     portada?: string;
     enlace_compra?: string;
-    horas_promedio?: number | null;
+    horas_promedio?: number;
   }

@@ -21,12 +21,8 @@ export class Detalle implements OnInit {
   async ngOnInit() {
     const paramId = this.route.snapshot.paramMap.get('id');
     if (paramId) {
-      const response = await fetch(
-        `${this.videojuegosService.url}?id=eq.${paramId}`,
-        { headers: this.videojuegosService.headers }
-      );
-      const data = await response.json();
-      this.juego.set(data[0] || null);
+      const id = parseInt(paramId, 10);
+      this.juego.set(await this.videojuegosService.obtenerJuegoPorId(id));
     }
     this.cargado.set(true);
   }

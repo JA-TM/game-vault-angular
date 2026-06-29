@@ -1,11 +1,15 @@
 <article class="tarjeta-juego">
   <h2 (click)="verDetalle()">{{ juego().nombre }}</h2>
-  <p><strong>Consola</strong> {{ juego().consola }}</p>
-  <p><strong>Género</strong> {{ juego().genero }}</p>
-  <p><strong>Desarrollador</strong> {{ juego().desarrollador }}</p>
-  <p><strong>Año</strong> {{ juego().anio_lanzamiento }}</p>
-  <p><strong>Puntuación</strong> {{ juego().puntuacion }} / 10</p>
-  <p><strong>Verificado</strong> {{ juego().verificado ? '✓ Sí' : '✕ No' }}</p>
+  <div class="tarjeta-datos">
+    <p><strong>Consola</strong> {{ juego().consola }}</p>
+    <p><strong>Género</strong> {{ juego().genero }}</p>
+    <p><strong>Desarrollador</strong> {{ juego().desarrollador }}</p>
+    <p><strong>Año</strong> {{ juego().anio_lanzamiento }}</p>
+    <p><strong>Puntuación</strong> {{ juego().puntuacion }} / 10</p>
+    <p class="verificado" [class.verificado-si]="juego().verificado">
+      <strong>Verificado</strong> {{ juego().verificado ? '✓ Sí' : '✕ No' }}
+    </p>
+  </div>
   <div class="acciones-tarjeta">
     <button class="btn-editar" (click)="onEditar()">Editar</button>
     <button class="btn-eliminar" (click)="eliminar()">Eliminar</button>

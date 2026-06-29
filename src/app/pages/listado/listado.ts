@@ -17,6 +17,7 @@ export class Listado implements OnInit {
   private router = inject(Router);
 
   juegos = this.videojuegosService.juegosPaginados;
+  juegosFiltrados = this.videojuegosService.juegosFiltrados;
   filtro = this.videojuegosService.filtro;
   mensaje = this.videojuegosService.mensaje;
   paginaActual = this.videojuegosService.paginaActual;
@@ -28,7 +29,6 @@ export class Listado implements OnInit {
 
   onFiltro(texto: string) {
     this.videojuegosService.setFiltro(texto);
-    this.videojuegosService.irAPagina(1);
   }
 
   onEditar(juego: Videojuego) {

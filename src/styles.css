@@ -1,52 +1,98 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
 
+:root {
+  --bg-deep: #08080f;
+  --bg-card: rgba(16, 16, 26, 0.94);
+  --text-primary: #dcdce6;
+  --text-muted: #9ea0ae;
+  --text-label: #7a8494;
+  --accent-cyan: #00ffe1;
+  --accent-cyan-dim: rgba(0, 255, 225, 0.35);
+  --accent-magenta: #ff2d78;
+  --accent-magenta-dim: rgba(255, 45, 120, 0.35);
+  --accent-amber: #fcee0a;
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-accent: rgba(0, 255, 225, 0.15);
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    font-family: 'Share Tech Mono', monospace;
-    background-color: #0a0a0f;
-    color: #e0e0e0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
+  font-family: 'Share Tech Mono', monospace;
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  background-image:
+    radial-gradient(ellipse 90% 70% at 50% 40%, rgba(22, 18, 32, 0.55) 0%, transparent 65%);
 }
 
+/* Capa CRT: scanlines + viñeta pantalla apagada */
 body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(0,0,0,0.80) 0%,
-            rgba(0,0,0,0.55) 40%,
-            rgba(0,0,0,0.55) 60%,
-            rgba(0,0,0,0.80) 100%
-        ),
-        repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 3px,
-            rgba(0, 0, 0, 0.08) 3px,
-            rgba(0, 0, 0, 0.08) 4px
-        );
-    pointer-events: none;
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at center, transparent 25%, rgba(0, 0, 0, 0.78) 100%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.14) 2px,
+      rgba(0, 0, 0, 0.14) 3px
+    );
+  opacity: 0.9;
+}
+
+/* Resplandor residual fosforescente + bordes CRT */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 200px rgba(0, 0, 0, 0.92),
+    inset 0 0 80px rgba(0, 0, 0, 0.55);
+  background:
+    radial-gradient(ellipse at 50% 48%, rgba(0, 255, 225, 0.018) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 48%, rgba(255, 45, 120, 0.012) 0%, transparent 55%);
+  animation: crt-idle 8s ease-in-out infinite;
+}
+
+@keyframes crt-idle {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.92; }
 }
 
 @keyframes glitch {
-    0%, 90%, 100% { text-shadow: 0 0 10px #00ffe1, 0 0 30px #00ffe180; transform: translate(0); }
-    91% { text-shadow: -2px 0 #ff2d78, 2px 0 #c800ff; transform: translate(-2px, 1px); }
-    93% { text-shadow: 2px 0 #ff2d78, -2px 0 #c800ff; transform: translate(2px, -1px); }
-    95% { text-shadow: 0 0 10px #00ffe1, 0 0 30px #00ffe180; transform: translate(0); }
+  0%, 90%, 100% {
+    text-shadow: 0 0 10px var(--accent-cyan), 0 0 30px rgba(0, 255, 225, 0.45);
+    transform: translate(0);
+  }
+  91% {
+    text-shadow: -2px 0 var(--accent-magenta), 2px 0 #c800ff;
+    transform: translate(-2px, 1px);
+  }
+  93% {
+    text-shadow: 2px 0 var(--accent-magenta), -2px 0 #c800ff;
+    transform: translate(2px, -1px);
+  }
+  95% {
+    text-shadow: 0 0 10px var(--accent-cyan), 0 0 30px rgba(0, 255, 225, 0.45);
+    transform: translate(0);
+  }
 }
 
 @keyframes flicker {
-    0%, 100%  { opacity: 1; }
-    92%       { opacity: 1; }
-    93%       { opacity: 0.4; }
-    94%       { opacity: 1; }
-    96%       { opacity: 0.7; }
-    97%       { opacity: 1; }
+  0%, 100%  { opacity: 1; }
+  92%       { opacity: 1; }
+  93%       { opacity: 0.55; }
+  94%       { opacity: 1; }
+  96%       { opacity: 0.78; }
+  97%       { opacity: 1; }
 }

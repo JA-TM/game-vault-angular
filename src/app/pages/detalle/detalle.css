@@ -1,143 +1,181 @@
 .contenedor {
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 0 20px;
-    position: relative;
-    z-index: 1;
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .detalle {
-    background: rgba(12, 12, 20, 0.92);
-    border: 1px solid #ffffff10;
-    border-top: 3px solid #00ffe1;
-    padding: 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  padding: 32px;
+  position: relative;
+}
+
+.detalle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(252, 238, 10, 0.35),
+    var(--accent-cyan-dim),
+    var(--accent-magenta-dim)
+  );
 }
 
 .detalle-header {
-    border-bottom: 1px solid #ffffff10;
-    padding-bottom: 20px;
-    margin-bottom: 28px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 20px;
+  margin-bottom: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .detalle-header h2 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.2em;
-    font-weight: 700;
-    color: #00ffe1;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    text-shadow: 0 0 10px #00ffe180;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2em;
+  font-weight: 700;
+  color: #b4c8c6;
+  text-transform: uppercase;
+  letter-spacing: 3px;
 }
 
 .verificado {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.65em;
-    letter-spacing: 2px;
-    color: #444;
-    border: 1px solid #ffffff15;
-    padding: 5px 12px;
-    text-transform: uppercase;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.65em;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  padding: 5px 12px;
+  text-transform: uppercase;
 }
 
 .verificado.activo {
-    color: #00ffe1;
-    border-color: #00ffe140;
-    text-shadow: 0 0 6px #00ffe180;
+  color: #8aab9a;
+  border-color: rgba(138, 171, 154, 0.35);
 }
 
 .detalle-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.detalle-portada {
+  margin-bottom: 24px;
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+
+.detalle-portada img {
+  display: block;
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+}
+
+.detalle-enlace {
+  font-size: 0.85em;
+  color: #8ecfc4;
+  word-break: break-all;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.detalle-enlace:hover {
+  color: #b8e8de;
 }
 
 .detalle-campo {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    border: 1px solid #ffffff08;
-    padding: 14px;
-    background: rgba(0, 255, 225, 0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid var(--border-subtle);
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .detalle-label {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.6em;
-    letter-spacing: 2px;
-    color: #444;
-    text-transform: uppercase;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.6em;
+  letter-spacing: 2px;
+  color: var(--text-label);
+  text-transform: uppercase;
 }
 
 .detalle-valor {
-    font-size: 0.95em;
-    color: #ccc;
-    letter-spacing: 0.5px;
+  font-size: 0.95em;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
 }
 
 .puntuacion {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.1em;
-    color: #00ffe1;
-    text-shadow: 0 0 6px #00ffe180;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1em;
+  color: #b4c8c6;
 }
 
 .detalle-acciones {
-    display: flex;
-    gap: 12px;
-    padding-top: 20px;
-    border-top: 1px solid #ffffff08;
+  display: flex;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
 }
 
 .btn-volver {
-    padding: 10px 24px;
-    background: transparent;
-    color: #888;
-    border: 1px solid #ffffff20;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.7em;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
+  padding: 10px 24px;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.7em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
 .btn-volver:hover {
-    color: #e0e0e0;
-    border-color: #ffffff40;
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
 .btn-editar {
-    padding: 10px 24px;
-    background: transparent;
-    color: #00ffe1;
-    border: 1px solid #00ffe150;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.7em;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.2s, box-shadow 0.2s;
+  padding: 10px 24px;
+  background: rgba(255, 255, 255, 0.02);
+  color: #9aacaa;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.7em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
 
 .btn-editar:hover {
-    background: #00ffe110;
-    box-shadow: 0 0 14px #00ffe140;
+  color: #d0e8e4;
+  border-color: var(--accent-cyan-dim);
+  background: rgba(0, 255, 225, 0.04);
 }
 
 .mensaje-vacio {
-    padding: 20px;
-    border: 1px solid #ffffff10;
-    color: #444;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.75em;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 1;
+  padding: 20px;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
 }

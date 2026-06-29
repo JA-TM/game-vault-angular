@@ -12,16 +12,24 @@
     }
   
     <div class="buscador">
-      <input
-        type="text"
-        placeholder="> buscar por nombre, consola o género..."
-        [value]="filtro()"
-        (input)="onFiltro($any($event.target).value)"
-      />
+      <div class="buscador-campo">
+        <span class="buscador-icon" aria-hidden="true">⌕</span>
+        <input
+          id="busc-filtro"
+          type="text"
+          placeholder="buscar por nombre, consola o género..."
+          [value]="filtro()"
+          (input)="onFiltro($any($event.target).value)"
+        />
+      </div>
     </div>
   
-    @if (juegos().length === 0) {
-      <p class="mensaje-vacio">No hay registros en la base de datos.</p>
+    @if (juegosFiltrados().length === 0) {
+      @if (filtro()) {
+        <p class="mensaje-vacio">No se encontraron resultados para la búsqueda.</p>
+      } @else {
+        <p class="mensaje-vacio">No hay registros en la base de datos.</p>
+      }
     } @else {
       <section class="listado-juegos">
         @for (juego of juegos(); track juego.id) {
@@ -32,10 +40,12 @@
         }
       </section>
   
-      <div class="paginacion">
-        <button (click)="anterior()" [disabled]="paginaActual() === 1">[ ← ]</button>
-        <span>{{ paginaActual() }} / {{ totalPaginas() }}</span>
-        <button (click)="siguiente()" [disabled]="paginaActual() === totalPaginas()">[ → ]</button>
-      </div>
+      @if (totalPaginas() > 1) {
+        <div class="paginacion">
+          <button (click)="anterior()" [disabled]="paginaActual() === 1">[ ← ]</button>
+          <span>{{ paginaActual() }} / {{ totalPaginas() }}</span>
+          <button (click)="siguiente()" [disabled]="paginaActual() === totalPaginas()">[ → ]</button>
+        </div>
+      }
     }
   </main>

@@ -17,6 +17,7 @@ export class Formulario implements OnInit {
   private route = inject(ActivatedRoute);
 
   cargado = signal(false);
+  mensaje = this.videojuegosService.mensaje;
   id: number | null = null;
   nombre = '';
   consola = '';
@@ -26,17 +27,15 @@ export class Formulario implements OnInit {
   anio_lanzamiento = 2024;
   puntuacion = 5;
   verificado = false;
+  portada = '';
+  enlace_compra = '';
+  horas_promedio: number | null = null;
 
   async ngOnInit() {
     const paramId = this.route.snapshot.paramMap.get('id');
     if (paramId) {
-      this.id = parseInt(paramId);
-      const response = await fetch(
-        `${this.videojuegosService.url}?id=eq.${this.id}`,
-        { headers: this.videojuegosService.headers }
-      );
-      const data = await response.json();
-      const juego = data[0];
+      this.id = parseInt(paramId, 10);
+      const juego = await this.videojuegosService.obtenerJuegoPorId(this.id);
       if (juego) {
         this.nombre = juego.nombre;
         this.consola = juego.consola;
@@ -46,6 +45,9 @@ export class Formulario implements OnInit {
         this.anio_lanzamiento = juego.anio_lanzamiento;
         this.puntuacion = juego.puntuacion;
         this.verificado = juego.verificado;
+        this.portada = juego.portada ?? '';
+        this.enlace_compra = juego.enlace_compra ?? '';
+        this.horas_promedio = juego.horas_promedio ?? null;
       }
     }
     this.cargado.set(true);
@@ -53,7 +55,7 @@ export class Formulario implements OnInit {
 
   async guardar() {
     if (!this.nombre || !this.consola || !this.genero || !this.modalidad || !this.desarrollador) {
-      alert('Rellena todos los campos obligatorios');
+      this.videojuegosService.notificarError('Rellena todos los campos obligatorios');
       return;
     }
 
@@ -65,16 +67,19 @@ export class Formulario implements OnInit {
       desarrollador: this.desarrollador,
       anio_lanzamiento: this.anio_lanzamiento,
       puntuacion: this.puntuacion,
-      verificado: this.verificado
+      verificado: this.verificado,
+      portada: this.portada || undefined,
+      enlace_compra: this.enlace_compra || undefined,
+      horas_promedio: this.horas_promedio ?? undefined
     };
 
-    if (this.id) {
-      await this.videojuegosService.editarJuego(this.id, juego);
-    } else {
-      await this.videojuegosService.crearJuego(juego);
-    }
+    const ok = this.id
+      ? await this.videojuegosService.editarJuego(this.id, juego)
+      : await this.videojuegosService.crearJuego(juego);
 
-    this.router.navigate(['/']);
+    if (ok) {
+      this.router.navigate(['/']);
+    }
   }
 
   cancelar() {

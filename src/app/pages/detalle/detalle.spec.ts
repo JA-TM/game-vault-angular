@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideRouter } from '@angular/router';
 import { Detalle } from './detalle';
+import { VideojuegosService } from '../../services/videojuegos.service';
 
 describe('Detalle', () => {
   let component: Detalle;
@@ -9,6 +10,13 @@ describe('Detalle', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Detalle],
+      providers: [
+        provideRouter([]),
+        {
+          provide: VideojuegosService,
+          useValue: { obtenerJuegoPorId: async () => null }
+        }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(Detalle);

@@ -1,117 +1,204 @@
 .contenedor {
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 0 20px;
-    position: relative;
-    z-index: 1;
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.formulario {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  padding: 32px;
+  position: relative;
+}
+
+.formulario::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(252, 238, 10, 0.35),
+    var(--accent-cyan-dim),
+    var(--accent-magenta-dim)
+  );
+}
+
+.formulario h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1em;
+  font-weight: 700;
+  color: #b4c8c6;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.campo {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.campo label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.65em;
+  letter-spacing: 2px;
+  color: var(--text-label);
+  text-transform: uppercase;
+  text-align: right;
+}
+
+.campo input[type="text"],
+.campo input[type="number"],
+.campo input[type="url"] {
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.9em;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo input:focus {
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 0 8px rgba(0, 255, 225, 0.06);
+}
+
+.campo input::placeholder {
+  color: #454550;
+}
+
+.campo-check {
+  grid-template-columns: 160px auto 1fr;
+}
+
+.campo input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent-cyan-dim);
+  cursor: pointer;
+}
+
+.acciones {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.acciones button {
+  padding: 10px 28px;
+  background: rgba(255, 255, 255, 0.02);
+  color: #9aacaa;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.7em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.acciones button:not(.btn-guardar):hover {
+  color: #d0e8e4;
+  border-color: var(--accent-cyan-dim);
+  background: rgba(0, 255, 225, 0.04);
+}
+
+.btn-guardar {
+  background: linear-gradient(135deg, #e9d5ff 0%, #c084fc 35%, #a855f7 70%, #9333ea 100%) !important;
+  color: #0a0a0f !important;
+  border: 1px solid #f0e0ff !important;
+  font-weight: 700;
+  text-shadow: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
+  box-shadow:
+    0 0 32px rgba(168, 85, 247, 0.6),
+    0 0 16px rgba(192, 132, 252, 0.4),
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  animation: btn-guardar-glow 3.2s ease-in-out infinite;
+}
+
+.btn-guardar:hover {
+  background: linear-gradient(135deg, #f3e8ff 0%, #d8b4fe 35%, #c084fc 70%, #a855f7 100%) !important;
+  color: #050508 !important;
+  box-shadow:
+    0 0 48px rgba(192, 132, 252, 0.8),
+    0 0 24px rgba(168, 85, 247, 0.55),
+    0 6px 22px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  transform: translateY(-2px);
+}
+
+@keyframes btn-guardar-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 32px rgba(168, 85, 247, 0.6),
+      0 0 16px rgba(192, 132, 252, 0.4),
+      0 4px 16px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.45);
   }
-  
-  .formulario {
-    border: 1px solid #145c33;
-    background: rgba(4, 18, 11, 0.7);
-    padding: 30px 34px;
-    box-shadow: 0 0 40px #00000080;
+  50% {
+    box-shadow:
+      0 0 44px rgba(192, 132, 252, 0.75),
+      0 0 22px rgba(168, 85, 247, 0.55),
+      0 4px 16px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.45);
   }
-  
-  .formulario h2 {
-    font-family: 'VT323', monospace;
-    font-size: 1.5rem;
-    letter-spacing: 3px;
-    color: #4ade80;
-    text-transform: uppercase;
-    border-bottom: 1px dashed #145c33;
-    padding-bottom: 12px;
-    margin-bottom: 26px;
-    text-shadow: 0 0 6px #4ade8066;
-  }
-  
-  .formulario h2::before { content: '> '; color: #2f9e5b; }
-  
-  .campo {
-    display: grid;
-    grid-template-columns: 180px 1fr;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 12px;
-  }
-  
-  .campo label {
-    font-size: 0.82rem;
-    letter-spacing: 1px;
-    color: #2f9e5b;
-    text-transform: uppercase;
-    text-align: right;
-  }
-  
-  .campo label::after { content: ':'; }
-  
-  .campo input[type="text"],
-  .campo input[type="number"] {
-    width: 100%;
-    padding: 9px 12px;
-    background: rgba(0,30,15,0.3);
-    border: 1px solid #1d7a44;
-    color: #7bffb0;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 0.95rem;
-    letter-spacing: 1px;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  
-  .campo input:focus {
-    border-color: #4ade80;
-    box-shadow: 0 0 10px #4ade8055;
-  }
-  
-  .campo input::placeholder { color: #1d7a44; }
-  
-  .campo-check {
-    grid-template-columns: 180px auto 1fr;
-  }
-  
-  .campo input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    accent-color: #4ade80;
-    cursor: pointer;
-  }
-  
-  .acciones {
-    display: flex;
-    gap: 12px;
-    margin-top: 24px;
-    padding-top: 20px;
-    border-top: 1px dashed #145c33;
-  }
-  
-  .acciones button {
-    padding: 10px 28px;
-    background: #1a0303;
-    color: #ff5b5b;
-    border: 1px solid #ff2b2b;
-    font-family: 'VT323', monospace;
-    font-size: 1.2rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    cursor: pointer;
-    text-shadow: 0 0 6px #ff2b2b88;
-    transition: background 0.2s, box-shadow 0.2s;
-  }
-  
-  .acciones button:hover {
-    background: #2a0505;
-    box-shadow: 0 0 18px #ff2b2baa;
-  }
-  
-  .btn-cancelar {
-    background: transparent !important;
-    color: #4ade80 !important;
-    border: 1px solid #1d7a44 !important;
-    text-shadow: none !important;
-  }
-  
-  .btn-cancelar:hover {
-    background: rgba(74, 222, 128, 0.1) !important;
-    box-shadow: 0 0 10px #4ade8055 !important;
-  }
+}
+
+.btn-cancelar {
+  color: #e088a8 !important;
+  border-color: rgba(255, 45, 120, 0.35) !important;
+  background: rgba(255, 45, 120, 0.06) !important;
+}
+
+.btn-cancelar:hover {
+  color: #0a0a0f !important;
+  border-color: #ff2d78 !important;
+  background: #ff2d78 !important;
+  box-shadow: 0 0 22px rgba(255, 45, 120, 0.55) !important;
+}
+
+.mensaje-vacio {
+  padding: 20px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-muted);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.mensaje-estado {
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75em;
+  letter-spacing: 2px;
+  border: 1px solid var(--border-accent);
+  background: rgba(0, 255, 225, 0.03);
+  color: #8ecfc4;
+  text-transform: uppercase;
+}
+
+.mensaje-estado.error {
+  color: #d4889f;
+  border-color: rgba(255, 45, 120, 0.25);
+  background: rgba(255, 45, 120, 0.04);
+}
