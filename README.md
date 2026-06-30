@@ -4,7 +4,7 @@ Catálogo CRUD de videojuegos con **Angular 22**, **signals**, **Supabase**, **R
 
 **Versión actual:** v1.9.1
 
-→ **[ESPECIFICACION.md](./ESPECIFICACION.md)**
+→ **[ESPECIFICACION.md](./ESPECIFICACION.md)** · **[VERIFICACION.md](./VERIFICACION.md)**
 
 ## Inicio rápido
 
@@ -37,6 +37,10 @@ ng serve
 - Mini parlante (esquina inferior derecha) para silenciar/reanudar en la sesión actual
 
 ## Verificación pre-deploy
+
+Checklist completo en **[VERIFICACION.md](./VERIFICACION.md)** (Supabase, CI, audio, RAWG, Vercel).
+
+Resumen rápido:
 
 - [ ] Migraciones v1.8 y v1.9 ejecutadas en Supabase
 - [ ] `RAWG_API_KEY` en Vercel

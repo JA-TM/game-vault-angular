@@ -209,10 +209,13 @@ ALTER TABLE videojuegos
 
 ## Checklist verificación v1.9.1
 
+→ Checklist detallado: **[VERIFICACION.md](./VERIFICACION.md)**
+
 1. Supabase: migraciones v1.8 + v1.9 aplicadas
 2. Vercel: `RAWG_API_KEY` configurada
 3. Recargar app → boot visible → ENTER → música loop
-4. Parlante pausa/reanuda
+4. Parlante pausa/reanuda; volumen respeta sistema (volume = 1)
 5. RAWG: buscar, vincular, sync puntuación y horas
 6. Guardar ficha con decimal (7.3) sin error PATCH
 7. Créditos audio visibles en footer y boot
+8. CI GitHub Actions en verde; tag `v1.9.1` en remoto
