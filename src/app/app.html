@@ -1,6 +1,22 @@
+<app-boot-overlay />
+
 <div class="header">
-    <h1>GAME VAULT</h1>
-    <div class="subtitulo">// catálogo de videojuegos — acceso restringido · v1.8</div>
-  </div>
-  
-  <router-outlet />
+  <h1>GAME VAULT</h1>
+  <div class="subtitulo">// catálogo de videojuegos — acceso restringido · v1.9</div>
+</div>
+
+<router-outlet />
+
+<footer class="app-footer">
+  <p class="footer-rawg">
+    Datos de juegos vía <a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG.io</a>
+  </p>
+  <p class="footer-audio">
+    Música:
+    <a href="https://freesound.org/s/592086/" target="_blank" rel="noopener noreferrer">"Horizon of the Unknown"</a>
+    by SoundFlakes —
+    <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>
+  </p>
+</footer>
+
+<app-audio-control />

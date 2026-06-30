@@ -1,0 +1,43 @@
+.audio-control {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(12, 12, 22, 0.92);
+  border: 1px solid rgba(0, 255, 225, 0.35);
+  cursor: pointer;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease,
+    box-shadow 0.12s ease,
+    transform 0.1s ease;
+}
+
+.audio-control:hover,
+.audio-control:focus-visible {
+  background: #00ffe1;
+  border-color: #00ffe1;
+  box-shadow: 0 0 22px rgba(0, 255, 225, 0.65);
+  transform: scale(1.06);
+}
+
+.audio-control:hover .audio-icon,
+.audio-control:focus-visible .audio-icon {
+  filter: brightness(0);
+}
+
+.audio-control.silenciado {
+  opacity: 0.75;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.audio-icon {
+  font-size: 1.25em;
+  line-height: 1;
+  transition: filter 0.12s ease;
+}

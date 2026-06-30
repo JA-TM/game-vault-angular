@@ -1,0 +1,25 @@
+@if (visible()) {
+  <div class="boot-backdrop" role="dialog" aria-modal="true" aria-labelledby="boot-titulo">
+    <div class="boot-panel">
+      <p class="boot-secuencia">&gt; SYSTEM BOOT SEQUENCE_</p>
+      <h2 id="boot-titulo" class="boot-titulo">GAME VAULT</h2>
+      <p class="boot-sub">VERIFICACIÓN · RANKING · CATÁLOGO</p>
+      <button
+        class="boot-enter"
+        type="button"
+        (click)="entrar()"
+        [disabled]="entrando()"
+      >
+        {{ entrando() ? '[ INICIANDO... ]' : '[ ENTER GAME VAULT ]' }}
+      </button>
+      <p class="boot-creditos">
+        Música:
+        <a href="https://freesound.org/s/592086/" target="_blank" rel="noopener noreferrer">
+          "Horizon of the Unknown"
+        </a>
+        by SoundFlakes — License:
+        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>
+      </p>
+    </div>
+  </div>
+}

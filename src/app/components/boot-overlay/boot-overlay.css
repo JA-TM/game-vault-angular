@@ -1,0 +1,148 @@
+.boot-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(4, 4, 10, 0.94);
+  backdrop-filter: blur(6px);
+  padding: 20px;
+}
+
+.boot-panel {
+  width: min(520px, 100%);
+  padding: 40px 36px 32px;
+  background: rgba(12, 12, 22, 0.98);
+  border: 1px solid rgba(0, 255, 225, 0.45);
+  position: relative;
+  text-align: center;
+  animation: boot-glow 3s ease-in-out infinite;
+}
+
+.boot-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    rgba(252, 238, 10, 0.5),
+    rgba(0, 255, 225, 0.85),
+    rgba(168, 85, 247, 0.6)
+  );
+}
+
+.boot-secuencia {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72em;
+  color: #8ecfc4;
+  letter-spacing: 2px;
+  margin-bottom: 28px;
+  animation: flicker 5s infinite;
+}
+
+.boot-titulo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.8em, 6vw, 2.4em);
+  font-weight: 900;
+  color: #fcee0a;
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  margin-bottom: 16px;
+  animation: glitch 4s infinite;
+  text-shadow:
+    0 0 12px rgba(252, 238, 10, 0.65),
+    0 0 28px rgba(252, 238, 10, 0.25);
+}
+
+.boot-sub {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.62em;
+  letter-spacing: 4px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+
+.boot-enter {
+  width: 100%;
+  max-width: 360px;
+  padding: 16px 24px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75em;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #0a0a0f;
+  background: #fcee0a;
+  border: 1px solid #fcee0a;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.12s ease,
+    border-color 0.15s ease;
+  box-shadow: 0 0 20px rgba(252, 238, 10, 0.35);
+}
+
+.boot-enter:hover:not(:disabled),
+.boot-enter:focus-visible:not(:disabled) {
+  background: #fff8c0;
+  border-color: #ffea00;
+  box-shadow:
+    0 0 32px rgba(252, 238, 10, 0.75),
+    0 0 16px rgba(0, 255, 225, 0.25);
+  transform: scale(1.02);
+}
+
+.boot-enter:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.boot-creditos {
+  margin-top: 24px;
+  font-size: 0.62em;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.boot-creditos a {
+  color: #8ecfc4;
+  text-decoration: none;
+}
+
+.boot-creditos a:hover {
+  text-decoration: underline;
+}
+
+@keyframes boot-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 24px rgba(0, 255, 225, 0.12),
+      inset 0 0 40px rgba(0, 255, 225, 0.03);
+  }
+  50% {
+    box-shadow:
+      0 0 40px rgba(0, 255, 225, 0.28),
+      0 0 20px rgba(168, 85, 247, 0.12),
+      inset 0 0 50px rgba(0, 255, 225, 0.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot-panel {
+    animation: none;
+  }
+
+  .boot-titulo {
+    animation: none;
+  }
+
+  .boot-secuencia {
+    animation: none;
+  }
+}

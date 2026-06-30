@@ -38,3 +38,33 @@
   text-transform: uppercase;
   animation: flicker 5s infinite;
 }
+
+.app-footer {
+  margin-top: auto;
+  padding: 24px 20px 72px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.app-footer p {
+  font-size: 0.65em;
+  color: var(--text-muted);
+  line-height: 1.7;
+  letter-spacing: 1px;
+}
+
+.app-footer a {
+  color: #8ecfc4;
+  text-decoration: none;
+}
+
+.app-footer a:hover {
+  text-decoration: underline;
+}
+
+.footer-audio {
+  margin-top: 6px;
+  opacity: 0.85;
+}
