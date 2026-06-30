@@ -32,24 +32,25 @@ export class Listado implements OnInit {
 
   async ngOnInit() {
     await this.videojuegosService.cargarJuegos();
-    void this.sincronizarPuntuacionVisibles();
+    void this.sincronizarDesdeRawgVisibles();
     const ok = this.route.snapshot.queryParamMap.get('ok');
     if (ok === '1') {
       this.videojuegosService.notificarOk('Registro guardado correctamente');
     }
   }
 
-  private async sincronizarPuntuacionVisibles() {
+  private async sincronizarDesdeRawgVisibles() {
     for (const j of this.juegos()) {
       if (!j.rawg_id) continue;
 
-      const sync = await this.rawgService.sincronizarPuntuacion(j.rawg_id);
+      const sync = await this.rawgService.sincronizarDesdeRawg(j.rawg_id);
       if (!sync) continue;
 
       const sinCambios =
         sync.puntuacion === j.puntuacion &&
         sync.puntuacion_reviews === j.puntuacion_reviews &&
-        sync.fuente_reviews === j.fuente_reviews;
+        sync.fuente_reviews === j.fuente_reviews &&
+        sync.horas_promedio === j.horas_promedio;
       if (sinCambios) continue;
 
       await this.videojuegosService.editarJuego(j.id, { ...j, ...sync }, { silencioso: true });

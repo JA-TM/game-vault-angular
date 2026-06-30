@@ -42,7 +42,10 @@
             @if (puntuacion > 0) {
               <span class="rawg-vinculado-puntaje">{{ puntuacion }}/10{{ fuente_reviews ? ' (' + fuente_reviews + ')' : '' }}</span>
             }
-            <span class="rawg-vinculado-hint">La puntuación se actualiza sola desde la API</span>
+            @if (horas_promedio != null && horas_promedio > 0) {
+              <span class="rawg-vinculado-horas">{{ horas_promedio }} h promedio (RAWG)</span>
+            }
+            <span class="rawg-vinculado-hint">Puntuación y horas se actualizan solas desde la API</span>
           </div>
         }
   
@@ -99,7 +102,11 @@
   
         <div class="campo">
           <label>Horas promedio</label>
-          <input type="number" [(ngModel)]="horas_promedio" min="0" placeholder="Opcional">
+          @if (rawg_id) {
+            <span class="campo-auto">{{ horas_promedio != null && horas_promedio > 0 ? horas_promedio + ' h (RAWG)' : '—' }}</span>
+          } @else {
+            <input type="number" [(ngModel)]="horas_promedio" min="0" placeholder="Auto al vincular RAWG">
+          }
         </div>
   
         <div class="campo campo-check">

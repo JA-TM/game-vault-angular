@@ -39,7 +39,7 @@ describe('Listado', () => {
         {
           provide: RawgService,
           useValue: {
-            sincronizarPuntuacion: async () => null
+            sincronizarDesdeRawg: async () => null
           }
         }
       ]

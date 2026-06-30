@@ -67,9 +67,14 @@ export class RawgService {
     }
   }
 
-  async sincronizarPuntuacion(
+  async sincronizarDesdeRawg(
     rawgId: number
-  ): Promise<Pick<Videojuego, 'puntuacion' | 'puntuacion_reviews' | 'fuente_reviews'> | null> {
+  ): Promise<
+    Pick<
+      Videojuego,
+      'puntuacion' | 'puntuacion_reviews' | 'fuente_reviews' | 'horas_promedio'
+    > | null
+  > {
     const detalle = await this.obtenerDetalle(rawgId);
     if (!detalle) return null;
     const puntaje = puntajeDesdeRawg(detalle);
@@ -77,7 +82,8 @@ export class RawgService {
     return {
       puntuacion: puntaje.valor,
       puntuacion_reviews: puntaje.valor,
-      fuente_reviews: puntaje.fuente
+      fuente_reviews: puntaje.fuente,
+      horas_promedio: detalle.playtime > 0 ? detalle.playtime : undefined
     };
   }
 

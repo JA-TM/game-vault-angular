@@ -80,6 +80,13 @@
   color: #454550;
 }
 
+.campo-auto {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.9em;
+  color: #8ecfc4;
+  padding: 10px 0;
+}
+
 .campo-check {
   grid-template-columns: 160px auto 1fr;
 }
@@ -99,7 +106,7 @@
   border-top: 1px solid var(--border-subtle);
 }
 
-.acciones button {
+.acciones button:not(.btn-guardar):not(.btn-cancelar) {
   padding: 10px 28px;
   background: rgba(255, 255, 255, 0.02);
   color: #9aacaa;
@@ -112,47 +119,71 @@
   transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
-.acciones button:not(.btn-guardar):hover {
+.acciones button:not(.btn-guardar):not(.btn-cancelar):hover {
   color: #d0e8e4;
   border-color: var(--accent-cyan-dim);
   background: rgba(0, 255, 225, 0.04);
 }
 
-.btn-guardar {
-  color: #c084fc !important;
-  border: 1px solid #a855f7 !important;
-  background: transparent !important;
+.acciones .btn-guardar {
+  padding: 10px 28px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.7em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: #c084fc;
+  border: 1px solid #a855f7;
+  background: transparent;
   font-weight: 700;
-  box-shadow: none !important;
+  box-shadow: none;
+  transform: none;
   transition:
     background 0.12s ease,
     border-color 0.12s ease,
     color 0.12s ease,
     box-shadow 0.12s ease,
-    transform 0.1s ease !important;
+    transform 0.1s ease;
 }
 
-.btn-guardar:hover,
-.btn-guardar:active {
-  color: #0a0a0f !important;
-  background: #a855f7 !important;
-  border-color: #c084fc !important;
-  box-shadow: 0 0 24px rgba(168, 85, 247, 0.7) !important;
+.acciones .btn-guardar:hover,
+.acciones .btn-guardar:active,
+.acciones .btn-guardar:focus-visible {
+  color: #0a0a0f;
+  background: #a855f7;
+  border-color: #c084fc;
+  box-shadow: 0 0 24px rgba(168, 85, 247, 0.7);
   transform: scale(1.03);
 }
 
-.btn-cancelar {
-  color: #e088a8 !important;
-  border-color: rgba(255, 45, 120, 0.35) !important;
-  background: rgba(255, 45, 120, 0.06) !important;
+.acciones .btn-cancelar {
+  padding: 10px 28px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.7em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 700;
+  color: #e088a8;
+  border: 1px solid rgba(255, 45, 120, 0.35);
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease,
+    color 0.12s ease,
+    box-shadow 0.12s ease,
+    transform 0.1s ease;
 }
 
-.btn-cancelar:hover,
-.btn-cancelar:active {
-  color: #0a0a0f !important;
-  border-color: #ff2d78 !important;
-  background: #ff2d78 !important;
-  box-shadow: 0 0 22px rgba(255, 45, 120, 0.55) !important;
+.acciones .btn-cancelar:hover,
+.acciones .btn-cancelar:active,
+.acciones .btn-cancelar:focus-visible {
+  color: #0a0a0f;
+  border-color: #ff2d78;
+  background: #ff2d78;
+  box-shadow: 0 0 22px rgba(255, 45, 120, 0.55);
   transform: scale(1.03);
 }
 
@@ -302,6 +333,12 @@
   font-family: 'Orbitron', sans-serif;
   font-size: 1.1em;
   color: #00ffe1;
+}
+
+.rawg-vinculado-horas {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.85em;
+  color: #8ecfc4;
 }
 
 .rawg-vinculado-hint {

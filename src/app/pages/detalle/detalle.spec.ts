@@ -27,7 +27,7 @@ describe('Detalle', () => {
           provide: RawgService,
           useValue: {
             obtenerReviews: async () => [],
-            sincronizarPuntuacion: async () => null,
+            sincronizarDesdeRawg: async () => null,
             buscarJuegos: async () => [],
             buscando: signal(false),
             actualizarDesdeRawg: async () => null,

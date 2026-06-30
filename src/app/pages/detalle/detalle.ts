@@ -50,7 +50,7 @@ export class Detalle implements OnInit {
       this.juego.set(juego);
       if (juego?.rawg_id) {
         this.reviews.set(await this.rawgService.obtenerReviews(juego.rawg_id));
-        await this.sincronizarPuntuacionSilencioso();
+        await this.sincronizarDesdeRawgSilencioso();
       } else if (juego) {
         this.rawgBusqueda = juego.nombre;
         await this.buscarRawg();
@@ -59,17 +59,18 @@ export class Detalle implements OnInit {
     this.cargado.set(true);
   }
 
-  private async sincronizarPuntuacionSilencioso() {
+  private async sincronizarDesdeRawgSilencioso() {
     const j = this.juego();
     if (!j?.rawg_id || !j.id) return;
 
-    const sync = await this.rawgService.sincronizarPuntuacion(j.rawg_id);
+    const sync = await this.rawgService.sincronizarDesdeRawg(j.rawg_id);
     if (!sync) return;
 
     const sinCambios =
       sync.puntuacion === j.puntuacion &&
       sync.puntuacion_reviews === j.puntuacion_reviews &&
-      sync.fuente_reviews === j.fuente_reviews;
+      sync.fuente_reviews === j.fuente_reviews &&
+      sync.horas_promedio === j.horas_promedio;
     if (sinCambios) return;
 
     const actualizado = { ...j, ...sync };
