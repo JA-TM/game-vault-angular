@@ -67,14 +67,15 @@ export class RawgService {
     }
   }
 
-  async sincronizarReviews(
+  async sincronizarPuntuacion(
     rawgId: number
-  ): Promise<Pick<Videojuego, 'puntuacion_reviews' | 'fuente_reviews'> | null> {
+  ): Promise<Pick<Videojuego, 'puntuacion' | 'puntuacion_reviews' | 'fuente_reviews'> | null> {
     const detalle = await this.obtenerDetalle(rawgId);
     if (!detalle) return null;
     const puntaje = puntajeDesdeRawg(detalle);
     if (!puntaje) return null;
     return {
+      puntuacion: puntaje.valor,
       puntuacion_reviews: puntaje.valor,
       fuente_reviews: puntaje.fuente
     };
@@ -102,7 +103,7 @@ export class RawgService {
       modalidad: 'Single Player',
       desarrollador: game.developers?.[0]?.name ?? '',
       anio_lanzamiento: anio,
-      puntuacion: puntaje?.valor ?? 5,
+      puntuacion: puntaje?.valor ?? 0,
       verificado: true,
       portada: game.background_image ?? undefined,
       enlace_compra: enlaceCompra || undefined,
@@ -122,7 +123,6 @@ export class RawgService {
     return {
       ...mapped,
       modalidad: juego.modalidad,
-      puntuacion: juego.puntuacion,
       verificado: juego.verificado || mapped.verificado
     };
   }
@@ -135,7 +135,6 @@ export class RawgService {
     return {
       ...mapped,
       modalidad: juego.modalidad,
-      puntuacion: juego.puntuacion,
       verificado: juego.verificado
     };
   }

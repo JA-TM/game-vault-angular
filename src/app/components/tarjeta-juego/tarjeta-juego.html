@@ -11,24 +11,18 @@
     <p><strong>Desarrollador</strong> {{ juego().desarrollador }}</p>
     <p><strong>Año</strong> {{ juego().anio_lanzamiento }}</p>
     <p class="puntuacion-fila">
-      <strong>Mi nota</strong>
-      <app-puntaje-animado [valor]="juego().puntuacion" /> / 10
-    </p>
-    @if (juego().puntuacion_reviews != null) {
-      <p class="puntuacion-fila reviews">
-        <strong>Reviews</strong>
-        <app-puntaje-animado [valor]="juego().puntuacion_reviews!" /> / 10
+      @if (juego().rawg_id && juego().puntuacion > 0) {
+        <strong>Puntuación</strong>
+        <app-puntaje-animado [valor]="juego().puntuacion" /> / 10
         @if (juego().fuente_reviews) {
           <span class="fuente">({{ juego().fuente_reviews }})</span>
         }
-      </p>
-    } @else if (!juego().rawg_id) {
-      <p class="puntuacion-fila sin-rawg">
-        <strong>Reviews</strong>
+      } @else {
+        <strong>Puntuación</strong>
         <span class="hint-rawg">Sin RAWG</span>
-      </p>
-    }
-    <p class="verificado" [class.verificado-si]="juego().verificado">
+      }
+    </p>
+    <p class="verificado" [class.verificado-si]="juego().verificado" [class.verificado-no]="!juego().verificado">
       <strong>Verificado</strong> {{ juego().verificado ? '✓ Sí' : '✕ No' }}
     </p>
   </div>

@@ -119,46 +119,25 @@
 }
 
 .btn-guardar {
-  background: linear-gradient(135deg, #e9d5ff 0%, #c084fc 35%, #a855f7 70%, #9333ea 100%) !important;
-  color: #0a0a0f !important;
-  border: 1px solid #f0e0ff !important;
+  color: #9aacaa;
+  border-color: rgba(168, 85, 247, 0.35) !important;
+  background: rgba(168, 85, 247, 0.06) !important;
   font-weight: 700;
-  text-shadow: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
-  box-shadow:
-    0 0 32px rgba(168, 85, 247, 0.6),
-    0 0 16px rgba(192, 132, 252, 0.4),
-    0 4px 16px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.45);
-  animation: btn-guardar-glow 3.2s ease-in-out infinite;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease,
+    color 0.12s ease,
+    box-shadow 0.12s ease,
+    transform 0.1s ease !important;
 }
 
-.btn-guardar:hover {
-  background: linear-gradient(135deg, #f3e8ff 0%, #d8b4fe 35%, #c084fc 70%, #a855f7 100%) !important;
-  color: #050508 !important;
-  box-shadow:
-    0 0 48px rgba(192, 132, 252, 0.8),
-    0 0 24px rgba(168, 85, 247, 0.55),
-    0 6px 22px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.55);
-  transform: translateY(-2px);
-}
-
-@keyframes btn-guardar-glow {
-  0%, 100% {
-    box-shadow:
-      0 0 32px rgba(168, 85, 247, 0.6),
-      0 0 16px rgba(192, 132, 252, 0.4),
-      0 4px 16px rgba(0, 0, 0, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.45);
-  }
-  50% {
-    box-shadow:
-      0 0 44px rgba(192, 132, 252, 0.75),
-      0 0 22px rgba(168, 85, 247, 0.55),
-      0 4px 16px rgba(0, 0, 0, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.45);
-  }
+.btn-guardar:hover,
+.btn-guardar:active {
+  color: #0a0a0f !important;
+  background: linear-gradient(135deg, #e9d5ff 0%, #c084fc 50%, #a855f7 100%) !important;
+  border-color: #d8b4fe !important;
+  box-shadow: 0 0 24px rgba(168, 85, 247, 0.65) !important;
+  transform: scale(1.03);
 }
 
 .btn-cancelar {
@@ -167,11 +146,13 @@
   background: rgba(255, 45, 120, 0.06) !important;
 }
 
-.btn-cancelar:hover {
+.btn-cancelar:hover,
+.btn-cancelar:active {
   color: #0a0a0f !important;
   border-color: #ff2d78 !important;
   background: #ff2d78 !important;
   box-shadow: 0 0 22px rgba(255, 45, 120, 0.55) !important;
+  transform: scale(1.03);
 }
 
 .mensaje-vacio {
@@ -295,6 +276,36 @@
 .rawg-score {
   font-size: 0.75em;
   color: #8ecfc4;
+}
+
+.rawg-vinculado {
+  margin-bottom: 28px;
+  padding: 16px 20px;
+  border: 1px solid var(--accent-cyan-dim);
+  background: rgba(0, 255, 225, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rawg-vinculado-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #8ecfc4;
+  text-transform: uppercase;
+}
+
+.rawg-vinculado-puntaje {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1em;
+  color: #00ffe1;
+}
+
+.rawg-vinculado-hint {
+  font-size: 0.75em;
+  color: var(--text-muted);
 }
 
 .portada-preview {

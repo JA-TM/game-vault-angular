@@ -29,8 +29,7 @@
         <span class="control-label">Ordenar:</span>
         <button [class.activo]="ordenCampo() === 'nombre'" (click)="setOrden('nombre')">Nombre</button>
         <button [class.activo]="ordenCampo() === 'anio'" (click)="setOrden('anio')">Año</button>
-        <button [class.activo]="ordenCampo() === 'puntuacion'" (click)="setOrden('puntuacion')">Nota</button>
-        <button [class.activo]="ordenCampo() === 'puntuacion_reviews'" (click)="setOrden('puntuacion_reviews')">Reviews</button>
+        <button [class.activo]="ordenCampo() === 'puntuacion'" (click)="setOrden('puntuacion')">Puntuación</button>
         <span class="orden-dir">{{ ordenAsc() ? '↑' : '↓' }}</span>
       </div>
       <label class="filtro-verificados">

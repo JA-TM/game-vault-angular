@@ -38,6 +38,10 @@ export class Detalle implements OnInit {
     return embed ? this.sanitizer.bypassSecurityTrustResourceUrl(embed) : null;
   });
 
+  tienePuntuacionApi(j: Videojuego): boolean {
+    return !!j.rawg_id && j.puntuacion > 0;
+  }
+
   async ngOnInit() {
     const paramId = this.route.snapshot.paramMap.get('id');
     if (paramId) {
@@ -46,7 +50,7 @@ export class Detalle implements OnInit {
       this.juego.set(juego);
       if (juego?.rawg_id) {
         this.reviews.set(await this.rawgService.obtenerReviews(juego.rawg_id));
-        await this.sincronizarReviewsSilencioso();
+        await this.sincronizarPuntuacionSilencioso();
       } else if (juego) {
         this.rawgBusqueda = juego.nombre;
         await this.buscarRawg();
@@ -55,14 +59,15 @@ export class Detalle implements OnInit {
     this.cargado.set(true);
   }
 
-  private async sincronizarReviewsSilencioso() {
+  private async sincronizarPuntuacionSilencioso() {
     const j = this.juego();
     if (!j?.rawg_id || !j.id) return;
 
-    const sync = await this.rawgService.sincronizarReviews(j.rawg_id);
+    const sync = await this.rawgService.sincronizarPuntuacion(j.rawg_id);
     if (!sync) return;
 
     const sinCambios =
+      sync.puntuacion === j.puntuacion &&
       sync.puntuacion_reviews === j.puntuacion_reviews &&
       sync.fuente_reviews === j.fuente_reviews;
     if (sinCambios) return;
@@ -109,7 +114,7 @@ export class Detalle implements OnInit {
       if (actualizado.rawg_id) {
         this.reviews.set(await this.rawgService.obtenerReviews(actualizado.rawg_id));
       }
-      this.videojuegosService.notificarOk('Vinculado con RAWG — reviews actualizadas');
+      this.videojuegosService.notificarOk('Vinculado con RAWG — puntuación actualizada');
     } finally {
       this.actualizandoRawg.set(false);
     }

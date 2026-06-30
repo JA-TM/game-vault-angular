@@ -11,30 +11,40 @@
       <section class="formulario">
         <h2>{{ id ? 'Editar registro' : 'Nuevo registro' }}</h2>
 
-        <div class="bloque-rawg">
-          <label class="bloque-rawg-label">Importar desde RAWG</label>
-          <div class="rawg-busqueda">
-            <input type="text" [(ngModel)]="rawgBusqueda" placeholder="Buscar juego..." (keyup.enter)="buscarRawg()">
-            <button type="button" class="btn-rawg" (click)="buscarRawg()" [disabled]="buscandoRawg()">
-              {{ buscandoRawg() ? '...' : 'Buscar' }}
-            </button>
+        @if (!rawg_id) {
+          <div class="bloque-rawg">
+            <label class="bloque-rawg-label">Vincular con RAWG (puntuación automática)</label>
+            <div class="rawg-busqueda">
+              <input type="text" [(ngModel)]="rawgBusqueda" placeholder="Buscar juego..." (keyup.enter)="buscarRawg()">
+              <button type="button" class="btn-rawg" (click)="buscarRawg()" [disabled]="buscandoRawg()">
+                {{ buscandoRawg() ? '...' : 'Buscar' }}
+              </button>
+            </div>
+            @if (resultadosRawg().length > 0) {
+              <ul class="rawg-resultados">
+                @for (r of resultadosRawg(); track r.id) {
+                  <li (click)="aplicarRawg(r)">
+                    @if (r.background_image) {
+                      <img [src]="r.background_image" [alt]="r.name">
+                    }
+                    <div class="rawg-info">
+                      <span class="rawg-nombre">{{ r.name }}</span>
+                      <span class="rawg-score">{{ previewPuntaje(r) }}</span>
+                    </div>
+                  </li>
+                }
+              </ul>
+            }
           </div>
-          @if (resultadosRawg().length > 0) {
-            <ul class="rawg-resultados">
-              @for (r of resultadosRawg(); track r.id) {
-                <li (click)="aplicarRawg(r)">
-                  @if (r.background_image) {
-                    <img [src]="r.background_image" [alt]="r.name">
-                  }
-                  <div class="rawg-info">
-                    <span class="rawg-nombre">{{ r.name }}</span>
-                    <span class="rawg-score">{{ previewPuntaje(r) }}</span>
-                  </div>
-                </li>
-              }
-            </ul>
-          }
-        </div>
+        } @else {
+          <div class="rawg-vinculado">
+            <span class="rawg-vinculado-label">✓ Vinculado a RAWG</span>
+            @if (puntuacion > 0) {
+              <span class="rawg-vinculado-puntaje">{{ puntuacion }}/10{{ fuente_reviews ? ' (' + fuente_reviews + ')' : '' }}</span>
+            }
+            <span class="rawg-vinculado-hint">La puntuación se actualiza sola desde la API</span>
+          </div>
+        }
   
         <div class="campo">
           <label>Nombre *</label>
@@ -64,21 +74,6 @@
         <div class="campo">
           <label>Año</label>
           <input type="number" [(ngModel)]="anio_lanzamiento">
-        </div>
-  
-        <div class="campo">
-          <label>Mi puntuación</label>
-          <input type="number" [(ngModel)]="puntuacion" min="1" max="10">
-        </div>
-
-        <div class="campo">
-          <label>Puntuación reviews</label>
-          <input type="number" [(ngModel)]="puntuacion_reviews" min="0" max="10" step="0.1" placeholder="Auto desde RAWG">
-        </div>
-
-        <div class="campo">
-          <label>Fuente reviews</label>
-          <input type="text" [(ngModel)]="fuente_reviews" placeholder="Metacritic, RAWG...">
         </div>
   
         <div class="campo">

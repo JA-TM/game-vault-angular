@@ -181,6 +181,19 @@
   color: #0a0a0f;
 }
 
+.tarjeta-juego p.verificado-no {
+  color: #6a6e78;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 6px 10px;
+  margin: 2px 0;
+  opacity: 0.75;
+}
+
+.tarjeta-juego p.verificado-no strong {
+  color: #6a6e78;
+}
+
 .tarjeta-juego:hover p.verificado-si {
   color: #0a0a0f;
   background: #39ff14;

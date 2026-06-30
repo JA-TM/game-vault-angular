@@ -7,7 +7,7 @@
       <section class="detalle">
         <div class="detalle-header">
           <h2>{{ juego()!.nombre }}</h2>
-          <span class="verificado" [class.activo]="juego()!.verificado">
+          <span class="verificado" [class.activo]="juego()!.verificado" [class.inactivo]="!juego()!.verificado">
             {{ juego()!.verificado ? '[ verificado ]' : '[ no verificado ]' }}
           </span>
         </div>
@@ -19,22 +19,18 @@
         }
 
         <div class="detalle-puntuaciones">
-          <div class="puntaje-badge">
-            <span class="puntaje-label">Mi nota</span>
-            <span class="puntaje-valor">
-              <app-puntaje-animado [valor]="juego()!.puntuacion" /> / 10
-            </span>
-          </div>
-          @if (juego()!.puntuacion_reviews != null) {
-            <div class="puntaje-badge reviews">
-              <span class="puntaje-label">Reviews{{ juego()!.fuente_reviews ? ' (' + juego()!.fuente_reviews + ')' : '' }}</span>
+          @if (tienePuntuacionApi(juego()!)) {
+            <div class="puntaje-badge">
+              <span class="puntaje-label">
+                Puntuación{{ juego()!.fuente_reviews ? ' (' + juego()!.fuente_reviews + ')' : '' }}
+              </span>
               <span class="puntaje-valor">
-                <app-puntaje-animado [valor]="juego()!.puntuacion_reviews!" /> / 10
+                <app-puntaje-animado [valor]="juego()!.puntuacion" /> / 10
               </span>
             </div>
-          } @else if (!juego()!.rawg_id) {
+          } @else {
             <div class="puntaje-badge sin-rawg">
-              <span class="puntaje-label">Reviews</span>
+              <span class="puntaje-label">Puntuación</span>
               <span class="puntaje-valor">Sin vincular RAWG</span>
             </div>
           }
@@ -42,7 +38,7 @@
 
         @if (!juego()!.rawg_id) {
           <section class="bloque-rawg">
-            <label class="bloque-rawg-label">Vincular con RAWG para sincronizar reviews</label>
+            <label class="bloque-rawg-label">Vincular con RAWG — clic en el juego correcto</label>
             <div class="rawg-busqueda">
               <input type="text" [(ngModel)]="rawgBusqueda" placeholder="Buscar juego..." (keyup.enter)="buscarRawg()">
               <button type="button" class="btn-rawg-buscar" (click)="buscarRawg()" [disabled]="buscandoRawg()">
@@ -91,6 +87,10 @@
           <div class="detalle-campo">
             <span class="detalle-label">Horas promedio</span>
             <span class="detalle-valor">{{ juego()!.horas_promedio ?? '—' }}</span>
+          </div>
+          <div class="detalle-campo detalle-verificado" [class.verificado-si]="juego()!.verificado" [class.verificado-no]="!juego()!.verificado">
+            <span class="detalle-label">Estado</span>
+            <span class="detalle-valor">{{ juego()!.verificado ? '✓ Verificado' : '✕ No verificado' }}</span>
           </div>
         </div>
 
