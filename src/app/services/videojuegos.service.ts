@@ -1,5 +1,5 @@
 import { Injectable, signal, computed } from '@angular/core';
-import { Videojuego } from '../models/videojuego';
+import { Videojuego, OrdenCampo } from '../models/videojuego';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -18,16 +18,40 @@ export class VideojuegosService {
   filtro = signal<string>('');
   mensaje = signal<{ texto: string; tipo: 'ok' | 'error' } | null>(null);
   paginaActual = signal(1);
+  cargando = signal(false);
+  soloVerificados = signal(false);
+  ordenCampo = signal<OrdenCampo>('nombre');
+  ordenAsc = signal(true);
   porPagina = 6;
 
   juegosFiltrados = computed(() => {
+    let lista = this.juegos();
     const texto = this.filtro().toLowerCase();
-    if (!texto) return this.juegos();
-    return this.juegos().filter(j =>
-      j.nombre.toLowerCase().includes(texto) ||
-      j.consola.toLowerCase().includes(texto) ||
-      j.genero.toLowerCase().includes(texto)
-    );
+    if (texto) {
+      lista = lista.filter(j =>
+        j.nombre.toLowerCase().includes(texto) ||
+        j.consola.toLowerCase().includes(texto) ||
+        j.genero.toLowerCase().includes(texto)
+      );
+    }
+    if (this.soloVerificados()) {
+      lista = lista.filter(j => j.verificado);
+    }
+    const campo = this.ordenCampo();
+    const asc = this.ordenAsc();
+    return [...lista].sort((a, b) => {
+      let va: string | number = '';
+      let vb: string | number = '';
+      switch (campo) {
+        case 'nombre': va = a.nombre.toLowerCase(); vb = b.nombre.toLowerCase(); break;
+        case 'anio': va = a.anio_lanzamiento; vb = b.anio_lanzamiento; break;
+        case 'puntuacion': va = a.puntuacion; vb = b.puntuacion; break;
+        case 'puntuacion_reviews': va = a.puntuacion_reviews ?? 0; vb = b.puntuacion_reviews ?? 0; break;
+      }
+      if (va < vb) return asc ? -1 : 1;
+      if (va > vb) return asc ? 1 : -1;
+      return 0;
+    });
   });
 
   juegosPaginados = computed(() => {
@@ -50,6 +74,10 @@ export class VideojuegosService {
     this.mostrarMensaje(texto, 'error');
   }
 
+  notificarOk(texto: string) {
+    this.mostrarMensaje(texto, 'ok');
+  }
+
   private ajustarPaginaActual() {
     const maxPagina = this.totalPaginas();
     if (maxPagina === 0) {
@@ -60,6 +88,7 @@ export class VideojuegosService {
   }
 
   async cargarJuegos(): Promise<void> {
+    this.cargando.set(true);
     try {
       const response = await fetch(this.url, { headers: this.headers });
       if (!response.ok) throw new Error();
@@ -69,6 +98,8 @@ export class VideojuegosService {
       this.ajustarPaginaActual();
     } catch {
       this.mostrarMensaje('Error al cargar los registros', 'error');
+    } finally {
+      this.cargando.set(false);
     }
   }
 
@@ -137,6 +168,21 @@ export class VideojuegosService {
 
   obtenerJuegos() {
     return this.juegosFiltrados;
+  }
+
+  setOrden(campo: OrdenCampo) {
+    if (this.ordenCampo() === campo) {
+      this.ordenAsc.update(v => !v);
+    } else {
+      this.ordenCampo.set(campo);
+      this.ordenAsc.set(true);
+    }
+    this.paginaActual.set(1);
+  }
+
+  toggleSoloVerificados() {
+    this.soloVerificados.update(v => !v);
+    this.paginaActual.set(1);
   }
 
   irAPagina(n: number) {

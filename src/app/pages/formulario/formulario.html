@@ -10,6 +10,31 @@
 
       <section class="formulario">
         <h2>{{ id ? 'Editar registro' : 'Nuevo registro' }}</h2>
+
+        <div class="bloque-rawg">
+          <label class="bloque-rawg-label">Importar desde RAWG</label>
+          <div class="rawg-busqueda">
+            <input type="text" [(ngModel)]="rawgBusqueda" placeholder="Buscar juego..." (keyup.enter)="buscarRawg()">
+            <button type="button" class="btn-rawg" (click)="buscarRawg()" [disabled]="buscandoRawg()">
+              {{ buscandoRawg() ? '...' : 'Buscar' }}
+            </button>
+          </div>
+          @if (resultadosRawg().length > 0) {
+            <ul class="rawg-resultados">
+              @for (r of resultadosRawg(); track r.id) {
+                <li (click)="aplicarRawg(r)">
+                  @if (r.background_image) {
+                    <img [src]="r.background_image" [alt]="r.name">
+                  }
+                  <div class="rawg-info">
+                    <span class="rawg-nombre">{{ r.name }}</span>
+                    <span class="rawg-score">{{ previewPuntaje(r) }}</span>
+                  </div>
+                </li>
+              }
+            </ul>
+          }
+        </div>
   
         <div class="campo">
           <label>Nombre *</label>
@@ -42,18 +67,39 @@
         </div>
   
         <div class="campo">
-          <label>Puntuación</label>
+          <label>Mi puntuación</label>
           <input type="number" [(ngModel)]="puntuacion" min="1" max="10">
+        </div>
+
+        <div class="campo">
+          <label>Puntuación reviews</label>
+          <input type="number" [(ngModel)]="puntuacion_reviews" min="0" max="10" step="0.1" placeholder="Auto desde RAWG">
+        </div>
+
+        <div class="campo">
+          <label>Fuente reviews</label>
+          <input type="text" [(ngModel)]="fuente_reviews" placeholder="Metacritic, RAWG...">
         </div>
   
         <div class="campo">
           <label>Portada (URL)</label>
           <input type="url" [(ngModel)]="portada" placeholder="https://...">
         </div>
+
+        @if (portada) {
+          <div class="portada-preview">
+            <img [src]="portada" alt="Vista previa portada">
+          </div>
+        }
   
         <div class="campo">
           <label>Enlace compra</label>
           <input type="url" [(ngModel)]="enlace_compra" placeholder="https://...">
+        </div>
+
+        <div class="campo">
+          <label>Video (URL)</label>
+          <input type="url" [(ngModel)]="video_url" placeholder="YouTube, trailer...">
         </div>
   
         <div class="campo">

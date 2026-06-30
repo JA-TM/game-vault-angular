@@ -23,12 +23,40 @@
         />
       </div>
     </div>
+
+    <div class="controles-listado">
+      <div class="ordenacion">
+        <span class="control-label">Ordenar:</span>
+        <button [class.activo]="ordenCampo() === 'nombre'" (click)="setOrden('nombre')">Nombre</button>
+        <button [class.activo]="ordenCampo() === 'anio'" (click)="setOrden('anio')">Año</button>
+        <button [class.activo]="ordenCampo() === 'puntuacion'" (click)="setOrden('puntuacion')">Nota</button>
+        <button [class.activo]="ordenCampo() === 'puntuacion_reviews'" (click)="setOrden('puntuacion_reviews')">Reviews</button>
+        <span class="orden-dir">{{ ordenAsc() ? '↑' : '↓' }}</span>
+      </div>
+      <label class="filtro-verificados">
+        <input type="checkbox" [checked]="soloVerificados()" (change)="toggleVerificados()">
+        Solo verificados
+      </label>
+    </div>
   
-    @if (juegosFiltrados().length === 0) {
-      @if (filtro()) {
+    @if (cargando()) {
+      <section class="skeleton-grid">
+        @for (i of [1,2,3,4,5,6]; track i) {
+          <div class="skeleton-card">
+            <div class="skeleton-img"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line corta"></div>
+          </div>
+        }
+      </section>
+    } @else if (juegosFiltrados().length === 0) {
+      @if (filtro() || soloVerificados()) {
         <p class="mensaje-vacio">No se encontraron resultados para la búsqueda.</p>
       } @else {
-        <p class="mensaje-vacio">No hay registros en la base de datos.</p>
+        <div class="empty-state">
+          <p class="mensaje-vacio">No hay registros en la base de datos.</p>
+          <button class="btn-nuevo" (click)="irANuevo()">[ crear primer juego ]</button>
+        </div>
       }
     } @else {
       <section class="listado-juegos">
@@ -48,4 +76,8 @@
         </div>
       }
     }
+
+    <p class="rawg-atribucion">
+      Datos de juegos vía <a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG.io</a>
+    </p>
   </main>

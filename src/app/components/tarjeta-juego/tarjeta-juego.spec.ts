@@ -17,7 +17,10 @@ describe('TarjetaJuego', () => {
     desarrollador: 'Test Studio',
     anio_lanzamiento: 2024,
     puntuacion: 8,
-    verificado: true
+    verificado: true,
+    portada: 'https://example.com/img.jpg',
+    puntuacion_reviews: 9.2,
+    fuente_reviews: 'Metacritic'
   };
 
   beforeEach(async () => {

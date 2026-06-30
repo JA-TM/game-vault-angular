@@ -1,17 +1,42 @@
 <article class="tarjeta-juego">
+  @if (juego().portada) {
+    <div class="tarjeta-portada" (click)="verDetalle()">
+      <img [src]="juego().portada" [alt]="juego().nombre" loading="lazy">
+    </div>
+  }
   <h2 (click)="verDetalle()">{{ juego().nombre }}</h2>
   <div class="tarjeta-datos">
     <p><strong>Consola</strong> {{ juego().consola }}</p>
     <p><strong>Género</strong> {{ juego().genero }}</p>
     <p><strong>Desarrollador</strong> {{ juego().desarrollador }}</p>
     <p><strong>Año</strong> {{ juego().anio_lanzamiento }}</p>
-    <p><strong>Puntuación</strong> {{ juego().puntuacion }} / 10</p>
+    <p class="puntuacion-fila">
+      <strong>Mi nota</strong>
+      <app-puntaje-animado [valor]="juego().puntuacion" /> / 10
+    </p>
+    @if (juego().puntuacion_reviews != null) {
+      <p class="puntuacion-fila reviews">
+        <strong>Reviews</strong>
+        <app-puntaje-animado [valor]="juego().puntuacion_reviews!" /> / 10
+        @if (juego().fuente_reviews) {
+          <span class="fuente">({{ juego().fuente_reviews }})</span>
+        }
+      </p>
+    }
     <p class="verificado" [class.verificado-si]="juego().verificado">
       <strong>Verificado</strong> {{ juego().verificado ? '✓ Sí' : '✕ No' }}
     </p>
   </div>
   <div class="acciones-tarjeta">
     <button class="btn-editar" (click)="onEditar()">Editar</button>
-    <button class="btn-eliminar" (click)="eliminar()">Eliminar</button>
+    <button class="btn-eliminar" (click)="pedirEliminar()">Eliminar</button>
   </div>
 </article>
+
+<app-confirmacion-modal
+  [visible]="mostrarModal()"
+  titulo="Eliminar registro"
+  [mensaje]="'¿Eliminar ' + juego().nombre + '?'"
+  (confirmar)="confirmarEliminar()"
+  (cancelar)="cancelarEliminar()"
+/>

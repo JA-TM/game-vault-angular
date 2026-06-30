@@ -202,3 +202,109 @@
   border-color: rgba(255, 45, 120, 0.25);
   background: rgba(255, 45, 120, 0.04);
 }
+
+.bloque-rawg {
+  margin-bottom: 28px;
+  padding: 20px;
+  border: 1px solid var(--accent-cyan-dim);
+  background: rgba(0, 255, 225, 0.03);
+}
+
+.bloque-rawg-label {
+  display: block;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.65em;
+  letter-spacing: 2px;
+  color: #8ecfc4;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.rawg-busqueda {
+  display: flex;
+  gap: 10px;
+}
+
+.rawg-busqueda input {
+  flex: 1;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.btn-rawg {
+  padding: 10px 20px;
+  background: rgba(0, 255, 225, 0.08);
+  border: 1px solid var(--accent-cyan-dim);
+  color: #8ecfc4;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.65em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.btn-rawg:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.rawg-resultados {
+  list-style: none;
+  margin-top: 14px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.rawg-resultados li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.rawg-resultados li:hover {
+  background: rgba(0, 255, 225, 0.06);
+  border-color: var(--accent-cyan-dim);
+}
+
+.rawg-resultados img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.rawg-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rawg-nombre {
+  font-size: 0.85em;
+  color: var(--text-primary);
+}
+
+.rawg-score {
+  font-size: 0.75em;
+  color: #8ecfc4;
+}
+
+.portada-preview {
+  margin: 0 0 20px 160px;
+  max-width: 200px;
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+
+.portada-preview img {
+  width: 100%;
+  display: block;
+}

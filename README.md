@@ -1,12 +1,8 @@
 # GAME VAULT ANGULAR
 
-Catálogo CRUD de videojuegos con **Angular 22**, **signals**, **Supabase** y estética **Cyberpunk 2077**.
+Catálogo CRUD de videojuegos con **Angular 22**, **signals**, **Supabase**, **RAWG API** y estética **Cyberpunk 2077**.
 
-**Versión actual:** v1.7
-
-## Documentación
-
-Especificación técnica completa, arquitectura, rutas, servicio, estilos e historial de versiones:
+**Versión actual:** v1.8
 
 → **[ESPECIFICACION.md](./ESPECIFICACION.md)**
 
@@ -14,35 +10,29 @@ Especificación técnica completa, arquitectura, rutas, servicio, estilos e hist
 
 ```bash
 npm install
+# Configura rawgApiKey en src/environments/environment.ts (desarrollo)
 ng serve
 ```
 
-Abrir `http://localhost:4200/`
+## Variables de entorno
+
+| Variable | Dónde | Uso |
+|----------|-------|-----|
+| `rawgApiKey` | `environment.ts` | Desarrollo local |
+| `RAWG_API_KEY` | Vercel | Producción (proxy `/api/rawg`) |
+
+## Supabase v1.8
+
+Ejecutar `supabase/migration-v1.8.sql` antes de usar campos RAWG.
 
 ## Scripts
 
 | Comando | Descripción |
 |---------|-------------|
-| `ng serve` | Servidor de desarrollo |
-| `ng build` | Build de producción |
-| `ng test` | Tests unitarios (Vitest) |
-
-## Estructura
-
-```
-src/app/
-├── models/videojuego.ts
-├── services/videojuegos.service.ts
-├── components/tarjeta-juego/
-└── pages/
-    ├── listado/      → /
-    ├── formulario/   → /nuevo, /editar/:id
-    └── detalle/      → /detalle/:id
-```
+| `ng serve` | Desarrollo |
+| `ng build` | Producción |
+| `ng test` | Tests (Vitest) |
 
 ## Stack
 
-- Angular 22 (standalone components)
-- Signals + computed()
-- Supabase REST API (fetch)
-- Despliegue: Vercel
+- Angular 22 · Signals · Supabase · RAWG · Vercel

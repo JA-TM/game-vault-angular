@@ -1,0 +1,74 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-top: 3px solid #ff2d78;
+  padding: 28px 32px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 0 40px rgba(255, 45, 120, 0.2);
+}
+
+.modal-panel h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.85em;
+  color: #ff2d78;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.modal-panel p {
+  color: var(--text-primary);
+  font-size: 0.9em;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.modal-acciones {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.modal-acciones button {
+  padding: 9px 22px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.65em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.btn-cancelar {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+}
+
+.btn-cancelar:hover {
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-confirmar {
+  background: #ff2d78;
+  color: #0a0a0f;
+  border: 1px solid #ff2d78;
+  font-weight: 700;
+}
+
+.btn-confirmar:hover {
+  box-shadow: 0 0 18px rgba(255, 45, 120, 0.55);
+}

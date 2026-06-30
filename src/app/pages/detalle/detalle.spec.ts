@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { Detalle } from './detalle';
 import { VideojuegosService } from '../../services/videojuegos.service';
+import { RawgService } from '../../services/rawg.service';
 
 describe('Detalle', () => {
   let component: Detalle;
@@ -14,7 +15,19 @@ describe('Detalle', () => {
         provideRouter([]),
         {
           provide: VideojuegosService,
-          useValue: { obtenerJuegoPorId: async () => null }
+          useValue: {
+            obtenerJuegoPorId: async () => null,
+            notificarError: () => {},
+            notificarOk: () => {},
+            editarJuego: async () => true
+          }
+        },
+        {
+          provide: RawgService,
+          useValue: {
+            obtenerReviews: async () => [],
+            actualizarDesdeRawg: async () => null
+          }
         }
       ]
     }).compileComponents();

@@ -17,6 +17,23 @@
             <img [src]="juego()!.portada" [alt]="juego()!.nombre">
           </div>
         }
+
+        <div class="detalle-puntuaciones">
+          <div class="puntaje-badge">
+            <span class="puntaje-label">Mi nota</span>
+            <span class="puntaje-valor">
+              <app-puntaje-animado [valor]="juego()!.puntuacion" /> / 10
+            </span>
+          </div>
+          @if (juego()!.puntuacion_reviews != null) {
+            <div class="puntaje-badge reviews">
+              <span class="puntaje-label">Reviews{{ juego()!.fuente_reviews ? ' (' + juego()!.fuente_reviews + ')' : '' }}</span>
+              <span class="puntaje-valor">
+                <app-puntaje-animado [valor]="juego()!.puntuacion_reviews!" /> / 10
+              </span>
+            </div>
+          }
+        </div>
   
         <div class="detalle-grid">
           <div class="detalle-campo">
@@ -40,29 +57,58 @@
             <span class="detalle-valor">{{ juego()!.anio_lanzamiento }}</span>
           </div>
           <div class="detalle-campo">
-            <span class="detalle-label">Puntuación</span>
-            <span class="detalle-valor puntuacion">{{ juego()!.puntuacion }} / 10</span>
-          </div>
-          <div class="detalle-campo">
             <span class="detalle-label">Horas promedio</span>
             <span class="detalle-valor">{{ juego()!.horas_promedio ?? '—' }}</span>
           </div>
-          <div class="detalle-campo">
-            <span class="detalle-label">Enlace compra</span>
-            @if (juego()!.enlace_compra) {
-              <a class="detalle-enlace" [href]="juego()!.enlace_compra" target="_blank" rel="noopener noreferrer">
-                {{ juego()!.enlace_compra }}
-              </a>
-            } @else {
-              <span class="detalle-valor">—</span>
-            }
-          </div>
         </div>
+
+        @if (videoEmbed()) {
+          <div class="detalle-video">
+            <span class="detalle-label">Trailer</span>
+            <iframe [src]="videoEmbed()" title="Trailer" allowfullscreen></iframe>
+          </div>
+        } @else if (juego()!.video_url) {
+          <div class="detalle-campo">
+            <span class="detalle-label">Video</span>
+            <a class="detalle-enlace" [href]="juego()!.video_url" target="_blank" rel="noopener noreferrer">
+              {{ juego()!.video_url }}
+            </a>
+          </div>
+        }
+
+        @if (reviews().length > 0) {
+          <section class="detalle-reviews">
+            <h3>Reviews RAWG</h3>
+            @for (r of reviews(); track r.id) {
+              <article class="review-item">
+                <header>
+                  <strong>{{ r.username }}</strong>
+                  <span>{{ r.rating }}/5</span>
+                </header>
+                <p>{{ r.text }}</p>
+              </article>
+            }
+          </section>
+        }
   
         <div class="detalle-acciones">
           <button class="btn-volver" (click)="volver()">[ ← volver ]</button>
+          @if (juego()!.rawg_id) {
+            <button class="btn-rawg" (click)="actualizarDesdeRawg()" [disabled]="actualizandoRawg()">
+              {{ actualizandoRawg() ? '[ actualizando... ]' : '[ sync RAWG ]' }}
+            </button>
+          }
+          @if (juego()!.enlace_compra) {
+            <a class="btn-comprar" [href]="juego()!.enlace_compra" target="_blank" rel="noopener noreferrer">
+              [ comprar ]
+            </a>
+          }
           <button class="btn-editar" (click)="editar()">[ editar ]</button>
         </div>
+
+        <p class="rawg-atribucion">
+          Datos vía <a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG.io</a>
+        </p>
       </section>
     }
   </main>
