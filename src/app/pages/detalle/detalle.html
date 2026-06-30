@@ -32,8 +32,40 @@
                 <app-puntaje-animado [valor]="juego()!.puntuacion_reviews!" /> / 10
               </span>
             </div>
+          } @else if (!juego()!.rawg_id) {
+            <div class="puntaje-badge sin-rawg">
+              <span class="puntaje-label">Reviews</span>
+              <span class="puntaje-valor">Sin vincular RAWG</span>
+            </div>
           }
         </div>
+
+        @if (!juego()!.rawg_id) {
+          <section class="bloque-rawg">
+            <label class="bloque-rawg-label">Vincular con RAWG para sincronizar reviews</label>
+            <div class="rawg-busqueda">
+              <input type="text" [(ngModel)]="rawgBusqueda" placeholder="Buscar juego..." (keyup.enter)="buscarRawg()">
+              <button type="button" class="btn-rawg-buscar" (click)="buscarRawg()" [disabled]="buscandoRawg()">
+                {{ buscandoRawg() ? '...' : 'Buscar' }}
+              </button>
+            </div>
+            @if (resultadosRawg().length > 0) {
+              <ul class="rawg-resultados">
+                @for (r of resultadosRawg(); track r.id) {
+                  <li (click)="vincularRawg(r)" [class.deshabilitado]="actualizandoRawg()">
+                    @if (r.background_image) {
+                      <img [src]="r.background_image" [alt]="r.name">
+                    }
+                    <div class="rawg-info">
+                      <span class="rawg-nombre">{{ r.name }}</span>
+                      <span class="rawg-score">{{ previewPuntaje(r) }}</span>
+                    </div>
+                  </li>
+                }
+              </ul>
+            }
+          </section>
+        }
   
         <div class="detalle-grid">
           <div class="detalle-campo">

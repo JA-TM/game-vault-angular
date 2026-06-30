@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { VideojuegosService } from '../../services/videojuegos.service';
+import { RawgService } from '../../services/rawg.service';
 import { TarjetaJuego } from '../../components/tarjeta-juego/tarjeta-juego';
 import { Videojuego, OrdenCampo } from '../../models/videojuego';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class Listado implements OnInit {
   private videojuegosService = inject(VideojuegosService);
+  private rawgService = inject(RawgService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
@@ -28,11 +30,28 @@ export class Listado implements OnInit {
   ordenCampo = this.videojuegosService.ordenCampo;
   ordenAsc = this.videojuegosService.ordenAsc;
 
-  ngOnInit() {
-    this.videojuegosService.cargarJuegos();
+  async ngOnInit() {
+    await this.videojuegosService.cargarJuegos();
+    void this.sincronizarReviewsVisibles();
     const ok = this.route.snapshot.queryParamMap.get('ok');
     if (ok === '1') {
       this.videojuegosService.notificarOk('Registro guardado correctamente');
+    }
+  }
+
+  private async sincronizarReviewsVisibles() {
+    for (const j of this.juegos()) {
+      if (!j.rawg_id) continue;
+
+      const sync = await this.rawgService.sincronizarReviews(j.rawg_id);
+      if (!sync) continue;
+
+      const sinCambios =
+        sync.puntuacion_reviews === j.puntuacion_reviews &&
+        sync.fuente_reviews === j.fuente_reviews;
+      if (sinCambios) continue;
+
+      await this.videojuegosService.editarJuego(j.id, { ...j, ...sync }, { silencioso: true });
     }
   }
 

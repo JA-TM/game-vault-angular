@@ -87,6 +87,7 @@ export class Formulario implements OnInit {
 
   async aplicarRawg(item: RawgGameListItem) {
     try {
+      const puntuacionPersonal = this.puntuacion;
       const mapped = await this.rawgService.mapearAVideojuego(item);
       this.nombre = mapped.nombre;
       this.consola = mapped.consola;
@@ -94,7 +95,7 @@ export class Formulario implements OnInit {
       this.modalidad = mapped.modalidad;
       this.desarrollador = mapped.desarrollador;
       this.anio_lanzamiento = mapped.anio_lanzamiento;
-      this.puntuacion = mapped.puntuacion;
+      this.puntuacion = this.id ? puntuacionPersonal : mapped.puntuacion;
       this.verificado = mapped.verificado;
       this.portada = mapped.portada ?? '';
       this.enlace_compra = mapped.enlace_compra ?? '';
@@ -105,7 +106,9 @@ export class Formulario implements OnInit {
       this.fuente_reviews = mapped.fuente_reviews ?? '';
       this.resultadosRawg.set([]);
       this.rawgBusqueda = '';
-      this.videojuegosService.notificarOk('Datos importados desde RAWG');
+      this.videojuegosService.notificarOk(
+        this.id ? 'Datos RAWG importados (tu nota personal se mantiene)' : 'Datos importados desde RAWG'
+      );
     } catch {
       this.videojuegosService.notificarError('No se pudo importar desde RAWG');
     }

@@ -22,6 +22,11 @@
           <span class="fuente">({{ juego().fuente_reviews }})</span>
         }
       </p>
+    } @else if (!juego().rawg_id) {
+      <p class="puntuacion-fila sin-rawg">
+        <strong>Reviews</strong>
+        <span class="hint-rawg">Sin RAWG</span>
+      </p>
     }
     <p class="verificado" [class.verificado-si]="juego().verificado">
       <strong>Verificado</strong> {{ juego().verificado ? '✓ Sí' : '✕ No' }}

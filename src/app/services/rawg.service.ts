@@ -67,6 +67,19 @@ export class RawgService {
     }
   }
 
+  async sincronizarReviews(
+    rawgId: number
+  ): Promise<Pick<Videojuego, 'puntuacion_reviews' | 'fuente_reviews'> | null> {
+    const detalle = await this.obtenerDetalle(rawgId);
+    if (!detalle) return null;
+    const puntaje = puntajeDesdeRawg(detalle);
+    if (!puntaje) return null;
+    return {
+      puntuacion_reviews: puntaje.valor,
+      fuente_reviews: puntaje.fuente
+    };
+  }
+
   async mapearAVideojuego(item: RawgGameListItem): Promise<Omit<Videojuego, 'id'>> {
     const detalle = await this.obtenerDetalle(item.id);
     const game = detalle ?? item;
@@ -98,6 +111,19 @@ export class RawgService {
       video_url: videoUrl || undefined,
       puntuacion_reviews: puntaje?.valor,
       fuente_reviews: puntaje?.fuente
+    };
+  }
+
+  async vincularJuegoExistente(
+    juego: Videojuego,
+    item: RawgGameListItem
+  ): Promise<Omit<Videojuego, 'id'> | null> {
+    const mapped = await this.mapearAVideojuego(item);
+    return {
+      ...mapped,
+      modalidad: juego.modalidad,
+      puntuacion: juego.puntuacion,
+      verificado: juego.verificado || mapped.verificado
     };
   }
 

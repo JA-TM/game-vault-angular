@@ -3,6 +3,7 @@ import { provideRouter } from '@angular/router';
 import { Detalle } from './detalle';
 import { VideojuegosService } from '../../services/videojuegos.service';
 import { RawgService } from '../../services/rawg.service';
+import { signal } from '@angular/core';
 
 describe('Detalle', () => {
   let component: Detalle;
@@ -26,7 +27,11 @@ describe('Detalle', () => {
           provide: RawgService,
           useValue: {
             obtenerReviews: async () => [],
-            actualizarDesdeRawg: async () => null
+            sincronizarReviews: async () => null,
+            buscarJuegos: async () => [],
+            buscando: signal(false),
+            actualizarDesdeRawg: async () => null,
+            vincularJuegoExistente: async () => null
           }
         }
       ]

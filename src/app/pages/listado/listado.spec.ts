@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { Listado } from './listado';
 import { VideojuegosService } from '../../services/videojuegos.service';
+import { RawgService } from '../../services/rawg.service';
 import { signal } from '@angular/core';
 
 describe('Listado', () => {
@@ -33,6 +34,12 @@ describe('Listado', () => {
             paginaAnterior: () => {},
             paginaSiguiente: () => {},
             notificarOk: () => {}
+          }
+        },
+        {
+          provide: RawgService,
+          useValue: {
+            sincronizarReviews: async () => null
           }
         }
       ]

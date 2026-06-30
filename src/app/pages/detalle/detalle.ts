@@ -1,17 +1,18 @@
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { VideojuegosService } from '../../services/videojuegos.service';
 import { RawgService } from '../../services/rawg.service';
 import { Videojuego } from '../../models/videojuego';
-import { RawgReview } from '../../models/rawg';
+import { RawgGameListItem, RawgReview } from '../../models/rawg';
 import { PuntajeAnimado } from '../../components/puntaje-animado/puntaje-animado';
-import { youtubeEmbedUrl } from '../../utils/puntaje-rawg';
+import { puntajeDesdeRawg, youtubeEmbedUrl } from '../../utils/puntaje-rawg';
 
 @Component({
   selector: 'app-detalle',
   standalone: true,
-  imports: [PuntajeAnimado],
+  imports: [PuntajeAnimado, FormsModule],
   templateUrl: './detalle.html',
   styleUrl: './detalle.css'
 })
@@ -26,6 +27,9 @@ export class Detalle implements OnInit {
   cargado = signal(false);
   reviews = signal<RawgReview[]>([]);
   actualizandoRawg = signal(false);
+  buscandoRawg = this.rawgService.buscando;
+  resultadosRawg = signal<RawgGameListItem[]>([]);
+  rawgBusqueda = '';
 
   videoEmbed = computed(() => {
     const url = this.juego()?.video_url;
@@ -42,9 +46,73 @@ export class Detalle implements OnInit {
       this.juego.set(juego);
       if (juego?.rawg_id) {
         this.reviews.set(await this.rawgService.obtenerReviews(juego.rawg_id));
+        await this.sincronizarReviewsSilencioso();
+      } else if (juego) {
+        this.rawgBusqueda = juego.nombre;
+        await this.buscarRawg();
       }
     }
     this.cargado.set(true);
+  }
+
+  private async sincronizarReviewsSilencioso() {
+    const j = this.juego();
+    if (!j?.rawg_id || !j.id) return;
+
+    const sync = await this.rawgService.sincronizarReviews(j.rawg_id);
+    if (!sync) return;
+
+    const sinCambios =
+      sync.puntuacion_reviews === j.puntuacion_reviews &&
+      sync.fuente_reviews === j.fuente_reviews;
+    if (sinCambios) return;
+
+    const actualizado = { ...j, ...sync };
+    const ok = await this.videojuegosService.editarJuego(j.id, actualizado, { silencioso: true });
+    if (ok) {
+      this.juego.set(actualizado);
+    }
+  }
+
+  previewPuntaje(item: RawgGameListItem): string {
+    const p = puntajeDesdeRawg(item);
+    return p ? `${p.valor}/10 (${p.fuente})` : '—';
+  }
+
+  async buscarRawg() {
+    try {
+      this.resultadosRawg.set(await this.rawgService.buscarJuegos(this.rawgBusqueda));
+    } catch {
+      this.videojuegosService.notificarError('Error al buscar en RAWG. Configura RAWG_API_KEY.');
+      this.resultadosRawg.set([]);
+    }
+  }
+
+  async vincularRawg(item: RawgGameListItem) {
+    const j = this.juego();
+    if (!j?.id) return;
+
+    this.actualizandoRawg.set(true);
+    try {
+      const merged = await this.rawgService.vincularJuegoExistente(j, item);
+      if (!merged) {
+        this.videojuegosService.notificarError('No se pudo vincular con RAWG');
+        return;
+      }
+
+      const ok = await this.videojuegosService.editarJuego(j.id, merged);
+      if (!ok) return;
+
+      const actualizado = { ...j, ...merged };
+      this.juego.set(actualizado);
+      this.resultadosRawg.set([]);
+      if (actualizado.rawg_id) {
+        this.reviews.set(await this.rawgService.obtenerReviews(actualizado.rawg_id));
+      }
+      this.videojuegosService.notificarOk('Vinculado con RAWG — reviews actualizadas');
+    } finally {
+      this.actualizandoRawg.set(false);
+    }
   }
 
   async actualizarDesdeRawg() {

@@ -133,7 +133,11 @@ export class VideojuegosService {
     }
   }
 
-  async editarJuego(id: number, juego: Omit<Videojuego, 'id'>): Promise<boolean> {
+  async editarJuego(
+    id: number,
+    juego: Omit<Videojuego, 'id'>,
+    opciones?: { silencioso?: boolean }
+  ): Promise<boolean> {
     try {
       const response = await fetch(`${this.url}?id=eq.${id}`, {
         method: 'PATCH',
@@ -141,11 +145,19 @@ export class VideojuegosService {
         body: JSON.stringify(juego)
       });
       if (!response.ok) throw new Error();
+      this.juegos.update(lista =>
+        lista.map(j => (j.id === id ? { ...j, ...juego, id } : j))
+      );
+      if (opciones?.silencioso) {
+        return true;
+      }
       await this.cargarJuegos();
       this.mostrarMensaje('Registro actualizado correctamente', 'ok');
       return true;
     } catch {
-      this.mostrarMensaje('Error al actualizar el registro', 'error');
+      if (!opciones?.silencioso) {
+        this.mostrarMensaje('Error al actualizar el registro', 'error');
+      }
       return false;
     }
   }
