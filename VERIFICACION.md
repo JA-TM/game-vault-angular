@@ -101,8 +101,11 @@ Archivos: `boot-overlay/`, `audio.service.ts`, `audio-control/`, `public/audio/h
 
 ## Historial de tags verificados
 
+→ Historial completo del proyecto: **[CHANGELOG.md](./CHANGELOG.md)**
+
 | Tag | Fecha | Notas |
 |-----|-------|-------|
 | v1.9.1 | 2026-06-30 | Boot cada recarga; volumen 100 % relativo |
 | v1.9 | 2026-06-30 | Audio loop, boot overlay, migración numeric |
 | v1.8 | — | Integración RAWG completa |
+| v0.1–v1.7 | — | CRUD Supabase, rutas, estilos Umbrella/Cyberpunk (ver CHANGELOG) |

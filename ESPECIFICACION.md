@@ -169,13 +169,31 @@ ALTER TABLE videojuegos
 
 ## Historial de versiones
 
+→ Changelog detallado: **[CHANGELOG.md](./CHANGELOG.md)**
+
 | Tag | Descripción |
 |-----|-------------|
-| v0.1–v1.6 | (ver commits anteriores) |
-| v1.7 | Refactor servicio, UI Cyberpunk refinada, docs |
+| v0.1 | Proyecto Angular creado, arrancado y conectado a GitHub |
+| v0.2 | Interface `Videojuego` + signals + `@for` + `@if` con datos mock |
+| v0.3 | `VideojuegosService` separado — arquitectura modelo/servicio/componente |
+| v0.4 | Conexión real a Supabase con fetch + RLS desactivado |
+| v0.5 | Componente `TarjetaJuego` separado con `input()` y `output()` |
+| v0.6 | Filtro de búsqueda reactivo con `computed()` por nombre, consola y género |
+| v0.7 | Formulario de creación con POST a Supabase |
+| v0.8 | Eliminación con DELETE a Supabase + confirmación |
+| v0.9 | Edición con PATCH a Supabase + carga de datos en formulario |
+| v1.0 | Estilo terminal Umbrella/Resident Evil |
+| v1.1 | Rutas con Angular Router — `/`, `/nuevo`, `/editar/:id`, `/detalle/:id` |
+| v1.2 | Página de detalle de juego |
+| v1.3 | Mensajes de estado (ok/error) con animación y timeout de 3 segundos |
+| v1.4 | Paginación de 6 juegos por página con `computed()` |
+| v1.5 | Despliegue en Vercel |
+| v1.6 | Rediseño completo con estilo Cyberpunk 2077 |
+| v1.7 | Refactor servicio (validación HTTP, `obtenerJuegoPorId`, campos opcionales), tests corregidos, UI Cyberpunk refinada, documentación técnica |
 | v1.8 | Integración RAWG, portada en fichas, puntaje reviews animado, video/comprar en detalle, skeleton loading, ordenación, filtro verificados, modal confirmación, proxy Vercel, CI GitHub Actions |
-| **v1.9** | Boot overlay, audio loop (SoundFlakes CC BY 4.0), parlante mute, puntuación/horas auto RAWG, UI verificado y botones refinados, migración numeric puntuaciones |
-| **v1.9.1** | Boot en cada recarga; volumen audio 100 % relativo (respeta sistema); docs y checklist verificación |
+| v1.8.1–v1.8.5 | Sync RAWG automática, puntuación/horas desde API, UI verificado y botones, guardado con puntuaciones decimales |
+| **v1.9** | Boot overlay, audio loop (SoundFlakes CC BY 4.0), parlante mute, migración numeric puntuaciones |
+| **v1.9.1** | Boot en cada recarga; volumen audio 100 % relativo; `VERIFICACION.md`; workflow GitHub Releases |
 
 ---
 

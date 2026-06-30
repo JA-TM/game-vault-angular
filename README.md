@@ -4,7 +4,7 @@ Catálogo CRUD de videojuegos con **Angular 22**, **signals**, **Supabase**, **R
 
 **Versión actual:** v1.9.1
 
-→ **[ESPECIFICACION.md](./ESPECIFICACION.md)** · **[VERIFICACION.md](./VERIFICACION.md)**
+→ **[CHANGELOG.md](./CHANGELOG.md)** · **[ESPECIFICACION.md](./ESPECIFICACION.md)** · **[VERIFICACION.md](./VERIFICACION.md)**
 
 ## Inicio rápido
 
