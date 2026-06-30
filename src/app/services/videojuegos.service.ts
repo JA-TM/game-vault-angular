@@ -78,6 +78,28 @@ export class VideojuegosService {
     this.mostrarMensaje(texto, 'ok');
   }
 
+  private prepararPayload(juego: Omit<Videojuego, 'id'>): Record<string, unknown> {
+    const payload: Record<string, unknown> = {};
+    for (const [clave, valor] of Object.entries(juego)) {
+      if (valor === undefined || valor === null || valor === '') continue;
+      payload[clave] = valor;
+    }
+    return payload;
+  }
+
+  private async mensajeErrorSupabase(response: Response, fallback: string): Promise<string> {
+    try {
+      const data = await response.json();
+      const detalle = data.message ?? data.error ?? data.hint;
+      if (detalle) {
+        return `${fallback}: ${detalle}`;
+      }
+    } catch {
+      /* respuesta no JSON */
+    }
+    return `${fallback} (HTTP ${response.status})`;
+  }
+
   private ajustarPaginaActual() {
     const maxPagina = this.totalPaginas();
     if (maxPagina === 0) {
@@ -121,9 +143,13 @@ export class VideojuegosService {
       const response = await fetch(this.url, {
         method: 'POST',
         headers: { ...this.headers, 'Prefer': 'return=minimal' },
-        body: JSON.stringify(juego)
+        body: JSON.stringify(this.prepararPayload(juego))
       });
-      if (!response.ok) throw new Error();
+      if (!response.ok) {
+        const msg = await this.mensajeErrorSupabase(response, 'Error al crear el registro');
+        this.mostrarMensaje(msg, 'error');
+        return false;
+      }
       await this.cargarJuegos();
       this.mostrarMensaje('Registro creado correctamente', 'ok');
       return true;
@@ -142,9 +168,15 @@ export class VideojuegosService {
       const response = await fetch(`${this.url}?id=eq.${id}`, {
         method: 'PATCH',
         headers: { ...this.headers, 'Prefer': 'return=minimal' },
-        body: JSON.stringify(juego)
+        body: JSON.stringify(this.prepararPayload(juego))
       });
-      if (!response.ok) throw new Error();
+      if (!response.ok) {
+        if (!opciones?.silencioso) {
+          const msg = await this.mensajeErrorSupabase(response, 'Error al actualizar el registro');
+          this.mostrarMensaje(msg, 'error');
+        }
+        return false;
+      }
       this.juegos.update(lista =>
         lista.map(j => (j.id === id ? { ...j, ...juego, id } : j))
       );

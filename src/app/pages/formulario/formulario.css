@@ -119,10 +119,11 @@
 }
 
 .btn-guardar {
-  color: #9aacaa;
-  border-color: rgba(168, 85, 247, 0.35) !important;
-  background: rgba(168, 85, 247, 0.06) !important;
+  color: #c084fc !important;
+  border: 1px solid #a855f7 !important;
+  background: transparent !important;
   font-weight: 700;
+  box-shadow: none !important;
   transition:
     background 0.12s ease,
     border-color 0.12s ease,
@@ -134,9 +135,9 @@
 .btn-guardar:hover,
 .btn-guardar:active {
   color: #0a0a0f !important;
-  background: linear-gradient(135deg, #e9d5ff 0%, #c084fc 50%, #a855f7 100%) !important;
-  border-color: #d8b4fe !important;
-  box-shadow: 0 0 24px rgba(168, 85, 247, 0.65) !important;
+  background: #a855f7 !important;
+  border-color: #c084fc !important;
+  box-shadow: 0 0 24px rgba(168, 85, 247, 0.7) !important;
   transform: scale(1.03);
 }
 
