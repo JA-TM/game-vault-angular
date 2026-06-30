@@ -88,7 +88,7 @@
             <span class="detalle-label">Horas promedio</span>
             <span class="detalle-valor">{{ juego()!.horas_promedio ?? '—' }}</span>
           </div>
-          <div class="detalle-campo detalle-verificado" [class.verificado-si]="juego()!.verificado" [class.verificado-no]="!juego()!.verificado">
+          <div class="detalle-campo">
             <span class="detalle-label">Estado</span>
             <span class="detalle-valor">{{ juego()!.verificado ? '✓ Verificado' : '✕ No verificado' }}</span>
           </div>

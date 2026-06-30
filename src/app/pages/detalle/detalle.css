@@ -1,5 +1,5 @@
 .contenedor {
-  max-width: 700px;
+  max-width: 860px;
   margin: 40px auto;
   padding: 0 20px;
   position: relative;
@@ -69,6 +69,16 @@
   background: #39ff14;
   border-color: #39ff14;
   box-shadow: 0 0 22px rgba(57, 255, 20, 0.65);
+  animation: verificado-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes verificado-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 38px rgba(57, 255, 20, 0.95);
+  }
 }
 
 .verificado.inactivo {
@@ -77,28 +87,6 @@
   border-color: rgba(255, 255, 255, 0.08);
   box-shadow: none;
   opacity: 0.75;
-}
-
-.detalle-campo.detalle-verificado.verificado-si {
-  background: #39ff14;
-  border-color: #39ff14;
-  box-shadow: 0 0 20px rgba(57, 255, 20, 0.45);
-}
-
-.detalle-campo.detalle-verificado.verificado-si .detalle-label,
-.detalle-campo.detalle-verificado.verificado-si .detalle-valor {
-  color: #0a0a0f;
-  font-weight: 700;
-}
-
-.detalle-campo.detalle-verificado.verificado-no {
-  background: rgba(255, 255, 255, 0.02);
-  border-color: rgba(255, 255, 255, 0.06);
-  opacity: 0.7;
-}
-
-.detalle-campo.detalle-verificado.verificado-no .detalle-valor {
-  color: var(--text-muted);
 }
 
 .detalle-grid {
@@ -292,9 +280,22 @@
 
 .detalle-acciones {
   display: flex;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 10px;
   padding-top: 20px;
   border-top: 1px solid var(--border-subtle);
+  align-items: center;
+}
+
+.detalle-acciones .btn-volver,
+.detalle-acciones .btn-rawg,
+.detalle-acciones .btn-comprar,
+.detalle-acciones .btn-editar {
+  white-space: nowrap;
+  flex: 0 0 auto;
+  letter-spacing: 1.5px;
+  font-size: 0.62em;
+  padding: 10px 16px;
 }
 
 .btn-volver {

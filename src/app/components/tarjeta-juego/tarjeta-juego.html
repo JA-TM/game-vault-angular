@@ -23,7 +23,12 @@
       }
     </p>
     <p class="verificado" [class.verificado-si]="juego().verificado" [class.verificado-no]="!juego().verificado">
-      <strong>Verificado</strong> {{ juego().verificado ? '✓ Sí' : '✕ No' }}
+      <strong>Verificado</strong>
+      @if (juego().verificado) {
+        <span class="verificado-icono" aria-label="Verificado">✓</span>
+      } @else {
+        <span class="verificado-icono no" aria-label="No verificado">✕</span>
+      }
     </p>
   </div>
   <div class="acciones-tarjeta">
