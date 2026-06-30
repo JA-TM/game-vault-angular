@@ -1,4 +1,4 @@
-# GAME VAULT ANGULAR — Especificación técnica v1.9
+# GAME VAULT ANGULAR — Especificación técnica v1.9.1
 
 Catálogo CRUD de videojuegos con Angular 22, signals, Supabase, integración RAWG, audio ambiente y estilo Cyberpunk 2077.
 
@@ -175,24 +175,28 @@ ALTER TABLE videojuegos
 | v1.7 | Refactor servicio, UI Cyberpunk refinada, docs |
 | v1.8 | Integración RAWG, portada en fichas, puntaje reviews animado, video/comprar en detalle, skeleton loading, ordenación, filtro verificados, modal confirmación, proxy Vercel, CI GitHub Actions |
 | **v1.9** | Boot overlay, audio loop (SoundFlakes CC BY 4.0), parlante mute, puntuación/horas auto RAWG, UI verificado y botones refinados, migración numeric puntuaciones |
+| **v1.9.1** | Boot en cada recarga; volumen audio 100 % relativo (respeta sistema); docs y checklist verificación |
 
 ---
 
-## AUDIO — AudioService (v1.9)
+## AUDIO — AudioService (v1.9+)
 
 **Archivo:** `src/app/services/audio.service.ts`  
 **Pista:** `/audio/horizon-unknown.mp3`
 
 | Método / signal | Descripción |
 |-----------------|-------------|
-| `iniciarLoop()` | Reproduce en loop (tras gesto usuario) |
-| `toggle()` | Pausa / reanuda; persiste `gv-audio-muted` en localStorage |
+| `iniciarLoop()` | Reproduce en loop (tras clic ENTER) |
+| `toggle()` | Pausa / reanuda en la sesión actual |
+| `reiniciarSesion()` | Detiene audio y resetea mute al cargar boot |
 | `reproduciendo` / `silenciado` | Signals de estado |
+
+**Volumen:** `audio.volume = 1` — escala 0–1 respecto al volumen maestro del navegador/sistema (sin cap artificial al 45 %).
 
 ### Boot overlay
 
-- Componente `boot-overlay` — pantalla de aceptación estilo terminal
-- Clic **ENTER GAME VAULT** → inicia audio + `sessionStorage gv-boot-accepted`
+- Se muestra **en cada recarga completa** de la página (sin `sessionStorage`)
+- Clic **ENTER GAME VAULT** → inicia audio en loop
 - Efectos: `glitch`, `flicker`, `boot-glow` (cyan/magenta)
 - Atribución SoundFlakes en overlay y footer global
 
@@ -200,3 +204,15 @@ ALTER TABLE videojuegos
 
 - Botón fijo 🔊/🔇 esquina inferior derecha
 - Respeta `prefers-reduced-motion`: sin autoplay en boot si está activo
+
+---
+
+## Checklist verificación v1.9.1
+
+1. Supabase: migraciones v1.8 + v1.9 aplicadas
+2. Vercel: `RAWG_API_KEY` configurada
+3. Recargar app → boot visible → ENTER → música loop
+4. Parlante pausa/reanuda
+5. RAWG: buscar, vincular, sync puntuación y horas
+6. Guardar ficha con decimal (7.3) sin error PATCH
+7. Créditos audio visibles en footer y boot

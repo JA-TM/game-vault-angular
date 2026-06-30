@@ -1,8 +1,6 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { AudioService } from '../../services/audio.service';
 
-const STORAGE_BOOT = 'gv-boot-accepted';
-
 function prefiereMovimientoReducido(): boolean {
   return typeof window !== 'undefined' &&
     typeof window.matchMedia === 'function' &&
@@ -22,22 +20,15 @@ export class BootOverlay implements OnInit {
   entrando = signal(false);
 
   ngOnInit() {
-    const reducido = prefiereMovimientoReducido();
-    if (sessionStorage.getItem(STORAGE_BOOT) === '1') {
-      this.visible.set(false);
-      if (!reducido && !this.audioService.silenciado()) {
-        void this.audioService.iniciarLoop();
-      }
-    }
+    this.audioService.reiniciarSesion();
+    this.visible.set(true);
   }
 
   async entrar() {
     if (this.entrando()) return;
     this.entrando.set(true);
-    sessionStorage.setItem(STORAGE_BOOT, '1');
 
-    const reducido = prefiereMovimientoReducido();
-    if (!reducido) {
+    if (!prefiereMovimientoReducido()) {
       await this.audioService.iniciarLoop();
     }
 
